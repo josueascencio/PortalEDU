@@ -1,0 +1,112 @@
+﻿@model PortalEDU.Models.ViewModels.CentroEducativoVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Crear</h1>
+
+<br />
+<br />
+<h3 class="text-center">Crear un nuevo Centro Educativo</h3>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row px-2 mx-2 border">
+        <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+        <div class="col-10 offset-1 mt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="centroEducativo.Nombre"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="centroEducativo.Nombre" class="form-control" />
+                    <span asp-validation-for="centroEducativo.Nombre" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="centroEducativo.Direccion"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="centroEducativo.Direccion" class="form-control" />
+                    <span asp-validation-for="centroEducativo.Direccion" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="centroEducativo.Correo"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="centroEducativo.Correo" class="form-control" />
+                    <span asp-validation-for="centroEducativo.Correo" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="centroEducativo.Telefono"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="centroEducativo.Telefono" class="form-control" />
+                    <span asp-validation-for="centroEducativo.Telefono" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="centroEducativo.Tipo"> </label>
+                </div>
+                    @*<label class="text-black-75"> Seleccione rol de usuario</label>*@
+                    <div class="col-8">
+                        <select class="browser-default custom-select" name="radUsuarioRole">
+                            <option selected="">-seleccione tipo de institucion-</option>
+
+                            <option value="@Model.centroEducativo.Tipo">Publico</option>
+                            <option value="@Model.centroEducativo.Tipo">Privado</option>
+
+                        </select>
+                        <span asp-validation-for="centroEducativo.Tipo" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+
+
+
+            @*// Aqui se despliega la lista de categoria, la relacion de 1 a muchos*@
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="centroEducativo.IdAnioAcademico"> </label>
+            </div>
+            <div class="col-8">
+                @Html.DropDownListFor(m => m.centroEducativo.IdAnioAcademico, Model.ListaCiclo, "-seleccione una ciclo academico-", new
+                { @class = "form-control" })
+            </div>
+            <span asp-validation-for="centroEducativo.Tipo" class="text-danger"> </span>
+        </div>
+
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <partial name="_VistaCrearVolver" />
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</form>
