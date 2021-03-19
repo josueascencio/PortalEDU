@@ -15,6 +15,7 @@ namespace PortalEDU.AccesoDatos.Data
             _db = db;
             Ciclo = new CicloRepository(_db);
             CentroEducativo = new CentroEducativoRepository(_db);
+            Aula = new AulaRepository(_db);
             //Articulo = new ArticuloRepository(_db);
             //Slider = new SliderRepository(_db);
             //Usuario = new UsuarioRepository(_db);
@@ -22,6 +23,7 @@ namespace PortalEDU.AccesoDatos.Data
 
         public ICicloRepository Ciclo { get; private set; }
         public ICentroEducativoRepository CentroEducativo { get; private set; }
+        public IAulaRepository Aula { get; private set; }
         //public IArticuloRepository Articulo { get; private set; }
         //public ISliderRepository Slider { get; private set; }
         //public IUsuarioRepository Usuario { get; private set; }

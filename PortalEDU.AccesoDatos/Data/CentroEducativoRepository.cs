@@ -19,16 +19,16 @@ namespace PortalEDU.AccesoDatos.Data
         }
 
 
-        //public IEnumerable<SelectListItem> GetListaCentroEducativo()
-        //{
-        //    return _db.CentroEducativo.Select(i => new SelectListItem()
-        //    {
-        //        Text = i.Nombre.ToString(),
-        //        Value = i.Id.ToString()
-        //    });
-        //}
+        public IEnumerable<SelectListItem> GetListaCentroEducativo()
+        {
+            return _db.CentroEducativo.Select(i => new SelectListItem()
+            {
+                Text = i.Nombre.ToString(),
+                Value = i.Id.ToString()
+            });
+        }
 
-     
+
 
         public void update(CentroEducativo centroEducativo)
         {

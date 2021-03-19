@@ -1,0 +1,68 @@
+﻿@model PortalEDU.Models.ViewModels.AulaVM
+@using PortalEDU.Models
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3 class="text-center">Editar</h3>
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="aula.Id" />
+    <input type="hidden" value="@DateTime.Now" asp-for="aula.update" />
+
+
+    <div class="row px-2 mx-2 border">
+        <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+        <div class="col-10 offset-1 mt-4">
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="aula.Nombre"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="aula.Nombre" class="form-control" />
+                    <span asp-validation-for="aula.Nombre" class="text-danger"> </span>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="aula.Seccion"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="aula.Seccion" class="form-control" />
+                    <span asp-validation-for="aula.Seccion" class="text-danger"> </span>
+                </div>
+            </div>
+
+            <input type="hidden" value="@DateTime.Now" asp-for="aula.update" />
+
+            @*// Aqui se despliega la lista de categoria, la relacion de 1 a muchos*@
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="aula.IdCentroEducativo"> </label>
+                </div>
+                <div class="col-8">
+                    @Html.DropDownListFor(m => m.aula.IdCentroEducativo, Model.ListaCentroEducativo, "-seleccione centro educarivo asociado-", new
+                    { @class = "form-control" })
+                </div>
+                <span asp-validation-for="aula.IdCentroEducativo" class="text-danger"> </span>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.aula.Id}">Actualizar</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a la vista</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

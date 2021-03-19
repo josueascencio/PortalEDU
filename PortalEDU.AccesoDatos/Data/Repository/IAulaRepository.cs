@@ -6,10 +6,10 @@ using System.Text;
 
 namespace PortalEDU.AccesoDatos.Data.Repository
 {
-    public interface ICentroEducativoRepository:IRepository<CentroEducativo>
+    public interface IAulaRepository:IRepository<Aula>
     {
-        IEnumerable<SelectListItem> GetListaCentroEducativo();
+        IEnumerable<SelectListItem> GetListaAula();
 
-        void update(CentroEducativo centroEducativo);
+        void update(Aula aula);
     }
 }

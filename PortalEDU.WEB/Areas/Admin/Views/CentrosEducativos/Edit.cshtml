@@ -1,16 +1,15 @@
 ﻿@model PortalEDU.Models.ViewModels.CentroEducativoVM
-@using PortalEDU.Utilidades
+@using PortalEDU.Models
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Crear</h1>
-
-<br />
-<br />
-<h3 class="text-center">Crear un nuevo Centro Educativo</h3>
+<h3 class="text-center">Editar</h3>
 <form asp-action="Create" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="centroEducativo.Id" />
+    <input type="hidden" value="@DateTime.Now" asp-for="centroEducativo.update" />
+    
+
     <div class="row px-2 mx-2 border">
         <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
         <div class="col-10 offset-1 mt-4">
@@ -76,40 +75,6 @@
                 </div>
             </div>
 
-            <input type="hidden" value="@DateTime.Now" asp-for="centroEducativo.update" />
-
-
-
-
-            @*<div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="centroEducativo.Tipo"> </label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="centroEducativo.Tipo" class="form-control" />
-                        <span asp-validation-for="centroEducativo.Tipo" class="text-danger"> </span>
-                    </div>
-                </div>*@
-
-
-            @*<div class="form-group row">
-                    <div class="col-8">
-                        <label asp-for="centroEducativo.Tipo"> </label>
-                    </div>
-
-                        <div class="col-8">
-                        <select asp-for="centroEducativo.Tipo" class="browser-default custom-select">
-                            <option  selected="">-seleccione tipo de institucion-</option>
-
-                            <option value="@Model.centroEducativo.Tipo">@Constantes.TipoPU</option>
-                            <option value="@Model.centroEducativo.Tipo">@Constantes.TipoPR</option>
-
-                        </select>
-                        <span asp-validation-for="centroEducativo.Tipo" class="text-danger"> </span>
-                    </div>
-                </div>*@
-
-
 
             <div class="form-group row">
                 <div class="col-4">
@@ -128,8 +93,6 @@
 
 
 
-
-
             @*// Aqui se despliega la lista de categoria, la relacion de 1 a muchos*@
 
             <div class="form-group row">
@@ -144,14 +107,19 @@
             </div>
 
 
+
             <div class="form-group row">
                 <div class="col-8 offset-4">
-                    <partial name="_VistaCrearVolver" />
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.centroEducativo.Id}">Actualizar</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a la vista</a>
+                        </div>
+                    </div>
                 </div>
-
-
             </div>
-
         </div>
     </div>
 </form>

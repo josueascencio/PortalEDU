@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-#nullable disable
+//#nullable disable
 
 namespace PortalEDU.Models
 {
-    public partial class CentroEducativo
+    public class CentroEducativo
     {
         //public CentroEducativo()
         //{
@@ -27,14 +27,17 @@ namespace PortalEDU.Models
         public string Tipo { get; set; }
         [Required]
         public string Director { get; set; }
+
         [Display(Name = "Año Escolar")]
         [Required]
         public int IdAnioAcademico { get; set; }
         [Required]
-        public byte[] Ts { get; set; }
+                
+        public DateTime update { get; set; }
+
         [ForeignKey("IdAnioAcademico")]
         public  Ciclo Ciclo { get; set; }
-        public virtual ICollection<Aula> Aulas { get; set; }
-        public virtual ICollection<Docente> Docentes { get; set; }
+        //public virtual ICollection<Aula> Aulas { get; set; }
+        //public virtual ICollection<Docente> Docentes { get; set; }
     }
 }
