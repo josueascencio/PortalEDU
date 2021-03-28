@@ -2,6 +2,44 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    @*body {
+  padding: 40px;
+}
+
+.ui.dropdown {
+  max-width: 800px;
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.selection.dropdown .menu {
+/*      max-height: 8.01428571rem; /* + 1.335714285 to 9.349999995rem */
+/*      max-height: 9.349999995rem; /* Adds a half */
+        max-height: 16.02857142rem; /* Double size */
+    }
+}
+@media only screen and (min-width: 768px) {
+    .ui.selection.dropdown .menu {
+/*         max-height: 10.68571429rem; /* + 1.3357142863 to 12.0214285763rem */
+      max-height: 12.0214285763rem;
+    }
+}
+@media only screen and (min-width: 992px) {
+    .ui.selection.dropdown .menu {
+      max-height: 16.02857143rem; /* + 1.3357142858 to 17.3642857158rem */
+    }
+}
+@media only screen and (min-width: 1920px) {
+    .ui.selection.dropdown .menu {
+        max-height: 21.37142857rem; /* + 1.3357142856 to 22.7071428556rem */
+    }
+}*@
+
+
+
+
+</style>
+
 <br />
 <div class="container">
     <div class="row">
@@ -15,7 +53,7 @@
 
     <br />
     <br />
-    <table id="tblCiclos" class="table table-striped table-bordered" style="width:100%;">
+    <table id="tblCiclos" class="table table-striped table-bordered nowrap table-hover" cellpadding="0" cellspacing="0" style="width:auto;">
         <thead>
             <tr>
                 <th>Id</th>
@@ -25,6 +63,86 @@
         </thead>
     </table>
 </div>
+
+
+@*<div class="ui form">
+
+    <h3>Dropdown with Topic Display</h3>
+
+    <div class="inline field">
+        <label>Select Topics</label>
+
+        <select name="skills" multiple="" class="label ui selection fluid dropdown">
+            <option value="">All</option>
+            <option value="1">Change Methodology</option>
+            <option value="2">Cognitive Computing & AI</option>
+            <option value="3">Connectivity & Collaboration</option>
+            <option value="4">Culture in Action</option>
+            <option value="5">Future of Work</option>
+            <option value="6">HR Transformation</option>
+            <option value="7">Human-centered Design</option>
+            <option value="8">Machine Learning & AI</option>
+            <option value="9">Operational Effectiveness</option>
+            <option value="10">Operational Excellence</option>
+            <option value="11">Organizational Change</option>
+
+        </select>
+    </div>
+
+
+
+    <h3>Dropdown with Selection Count</h3>
+    <div class="inline field">
+        <label>Select Topics</label>
+
+        <select name="skills" multiple="" class="ui fluid selection dropdown no label">
+            <option value="">All</option>
+            <option value="1">Change Methodology</option>
+            <option value="2">Cognitive Computing & AI</option>
+            <option value="3">Connectivity & Collaboration</option>
+            <option value="4">Culture in Action</option>
+            <option value="5">Future of Work</option>
+            <option value="6">HR Transformation</option>
+            <option value="7">Human-centered Design</option>
+            <option value="8">Machine Learning & AI</option>
+            <option value="9">Operational Effectiveness</option>
+            <option value="10">Operational Excellence</option>
+            <option value="11">Organizational Change</option>
+        </select>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+
+<div class="ui button">
+    Clear Filters
+</div>*@
+
+
+
+
+
 @section Scripts{
-    <script src="~/js/ciclo.js"></script>
+    <script src="~/js/ciclo.js"> </script>
+
+    @*<script>
+        $('.label.ui.dropdown')
+            .dropdown();
+
+        $('.no.label.ui.dropdown')
+            .dropdown({
+                useLabels: false
+            });
+
+        $('.ui.button').on('click', function () {
+            $('.ui.dropdown')
+                .dropdown('restore defaults')
+        })
+
+
+    </script>*@
+
 }

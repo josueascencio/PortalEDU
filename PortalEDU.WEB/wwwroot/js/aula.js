@@ -21,20 +21,54 @@ function cargarDatatable() {
             {
                 "data": "id",
                 "render": function (data) {
-                    return `<div class="text-center">
-                            <a href='/Admin/Aulas/Edit/${data}' class='btn btn-success btn-sm text-white ' style='cursor:pointer; width:50px;'>
+                    return `<div class="text-center card border-primary justify-content-center">
+                            <a href='/Admin/Aulas/Edit/${data}' class='btn btn-success btn-sm text-white ' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-edit'></i> Editar
                             </a>
                             &nbsp;
-                            <a onclick=Delete("/Admin/Aulas/Delete/${data}") class='btn btn-danger btn-sm text-white ' style='cursor:pointer; width:50px;'>
+                            <a onclick=Delete("/Admin/Aulas/Delete/${data}") class='btn btn-danger btn-sm text-white ' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-trash-alt'></i> Borrar
                             </a>
                             `;
-                }, "width": "30%"
+                }, "width": "1%"
             }
         ],
         "language": {
-            "emptyTable": "No hay registros"
+
+            "sProcessing": "Procesando...",
+
+            "sLengthMenu": "Mostrar _MENU_ registros",
+
+            "sZeroRecords": "No se encontraron resultados",
+
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+
+            "sInfoPostFix": "",
+
+            "sSearch": "Buscar:",
+
+            "sUrl": "",
+
+            "sInfoThousands": ",",
+
+            "sLoadingRecords": "Cargando...",
+
+            "oPaginate": {
+
+                "sFirst": "Primero",
+
+                "sLast": "Último",
+
+                "sNext": "Siguiente",
+
+                "sPrevious": "Anterior"
+            }
         },
         "width": "100%"
     });

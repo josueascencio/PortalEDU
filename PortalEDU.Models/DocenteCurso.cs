@@ -11,7 +11,8 @@ namespace PortalEDU.Models
         [Key]
         public int IdCurso { get; set; }
         public int IdDocente { get; set; }
-        public byte[] Ts { get; set; }
+        [Required]
+        public DateTime update { get; set; }
 
         public virtual Curso IdCursoNavigation { get; set; }
         public virtual Docente IdDocenteNavigation { get; set; }

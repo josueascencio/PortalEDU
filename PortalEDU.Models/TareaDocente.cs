@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -12,6 +13,7 @@ namespace PortalEDU.Models
             TareaAlumnos = new HashSet<TareaAlumno>();
         }
 
+        [Key]
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -21,7 +23,8 @@ namespace PortalEDU.Models
         public int? Puntuacion { get; set; }
         public string Comentario { get; set; }
         public int? IdDocente { get; set; }
-        public byte[] Ts { get; set; }
+        [Required]
+        public DateTime update { get; set; }
 
         public virtual Docente IdDocenteNavigation { get; set; }
         public virtual ICollection<TareaAlumno> TareaAlumnos { get; set; }

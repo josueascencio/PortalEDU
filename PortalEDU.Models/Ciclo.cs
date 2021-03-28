@@ -16,7 +16,8 @@ namespace PortalEDU.Models
         [Key]
         public int Id { get; set; }
         public int AnioAcademico { get; set; }
-        public byte[] Ts { get; set; }
+        [Required]
+        public DateTime update { get; set; }
 
         //public virtual ICollection<CentroEducativo> CentroEducativos { get; set; }
     }

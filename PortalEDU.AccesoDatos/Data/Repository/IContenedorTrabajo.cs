@@ -8,8 +8,10 @@ namespace PortalEDU.AccesoDatos.Data.Repository
     {
         ICicloRepository Ciclo { get; }
         ICentroEducativoRepository CentroEducativo { get; }
-
         IAulaRepository Aula { get; }
+        IAlumnoRepository Alumno { get; }
+        IDocenteRepository Docente { get; }
+        IResponsableRepository Responsable { get; }
 
 
         void Save();

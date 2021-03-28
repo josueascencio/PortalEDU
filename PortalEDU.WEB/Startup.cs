@@ -31,7 +31,7 @@ namespace PortalEDU.WEB
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            
+
             //services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -40,6 +40,13 @@ namespace PortalEDU.WEB
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+            //Esto resuelve Error de serializacion ciclica
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
