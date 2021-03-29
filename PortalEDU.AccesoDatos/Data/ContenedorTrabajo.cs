@@ -41,9 +41,12 @@ namespace PortalEDU.AccesoDatos.Data
             _db.Dispose();
         }
 
+
         public void Save()
         {
-            _db.SaveChanges();
+
+                _db.SaveChanges();
+
         }
     }
 }

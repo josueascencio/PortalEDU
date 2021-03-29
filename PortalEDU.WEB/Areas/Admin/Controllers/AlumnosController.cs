@@ -234,6 +234,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             _contenedorTrabajo.Alumno.Remove(articuloDesdeDb);
             _contenedorTrabajo.Save();
+                    
             return Json(new { success = true, message = "Articulo borrado con exito" });
         }
 

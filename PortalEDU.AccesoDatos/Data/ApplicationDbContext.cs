@@ -16,14 +16,18 @@ namespace PortalEDU.AccesoDatos.Data
         {
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //    {
-        //        relationship.DeleteBehavior = DeleteBehavior.Restrict;
-        //    }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+             .SelectMany(t => t.GetForeignKeys())
+             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
 
-        //}
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+
+            base.OnModelCreating(modelBuilder);
+
+        }
 
 
         public DbSet<Alumno> Alumno { get; set; }

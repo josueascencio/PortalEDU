@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Vereyon.Web;
 
 namespace PortalEDU.WEB
 {
@@ -40,6 +41,11 @@ namespace PortalEDU.WEB
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+            // este servicio agrega mensajes tipo toast para manerjar errores el paquete se llama
+            //Vereyon.Web.FlashMessage
+            services.AddFlashMessage();
+
 
             //Esto resuelve Error de serializacion ciclica
 

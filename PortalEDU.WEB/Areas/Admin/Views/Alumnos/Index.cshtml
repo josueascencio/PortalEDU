@@ -4,6 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Cuando no hay registros en las celdas*@
+<style>
+    table td:empty::before {
+        content: "Sin registros";
+        color: brown;
+    }
+</style>
+
 <br />
 <div class="container">
     <div class="row">
