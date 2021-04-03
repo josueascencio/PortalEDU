@@ -1,7 +1,9 @@
 Lista de pendientes por completar
 
-Falta agregar excepciones por borrado en cascada da error por la integridad referencial.
+Falta agregar excepciones por borrado en cascada da error por la integridad referencial. LISTO (VER RESPONSABLE)
 Falñta crear las acciones de la entidad CIclo 
 Falta Agregar data annotattions a todas las entidades del modelo
 Revisar que al momento de editzr no se conservan las fechas 
+
+Tomar como ejemplo 
 

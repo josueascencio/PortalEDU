@@ -26,6 +26,7 @@ namespace PortalEDU.Models
         public DateTime FechaNacimiento { get; set; }
         public string GradoAcademico { get; set; }
         public string Direccion { get; set; }
+       
         public string Foto { get; set; }
         public string Sexo { get; set; }
 

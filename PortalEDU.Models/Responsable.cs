@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -15,14 +16,16 @@ namespace PortalEDU.Models
         public string Telefono { get; set; }
         public string Profesion { get; set; }
         public string Direccion { get; set; }
+        
         public string Foto { get; set; }
         public string TelefonoTrabajo { get; set; }
         //public int IdAlumno { get; set; }
         [Required]
         public DateTime update { get; set; }
 
+        [NotMapped]
+        public string NombreCompleto => $"{Nombre} {Apellido}";
 
-        [Required]
         [Display(Name = "Alumnos a Cargo")]
      
         public virtual ICollection<Alumno> AlumnoLista { get; set; }

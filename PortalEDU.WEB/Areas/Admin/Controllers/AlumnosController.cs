@@ -151,7 +151,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                     var subidas = Path.Combine(rutaPrincipal, @"imagenes\alumnos");
                     var extension = Path.GetExtension(archivos[0].FileName);
                     var nuevaExtension = Path.GetExtension(archivos[0].FileName);
-
                     var rutaImagen = Path.Combine(rutaPrincipal, alumnoDesdeDb.Foto.TrimStart('\\'));
 
 

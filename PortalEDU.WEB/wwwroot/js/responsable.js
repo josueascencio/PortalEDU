@@ -7,6 +7,37 @@ $(document).ready(function () {
 
 function cargarDatatable() {
     dataTable = $("#tblResponsables").DataTable({
+
+
+
+        dom: 'Bfrtip',
+        buttons: [
+            'copy',
+            {
+                extend: 'excel',
+                messageTop: 'The information in this table is copyright to Sirius Cybernetics Corp.'
+            },
+            {
+                extend: 'pdf',
+                messageBottom: null
+            },
+            {
+                extend: 'print',
+                messageTop: function () {
+                    printCounter++;
+
+                    if (printCounter === 1) {
+                        return 'This is the first time you have printed this document.';
+                    }
+                    else {
+                        return 'You have printed this document ' + printCounter + ' times';
+                    }
+                },
+                messageBottom: null
+            }
+        ],
+
+
         "ajax": {
             "url": "/admin/responsables/GetAll",
             "type": "GET",
@@ -15,8 +46,8 @@ function cargarDatatable() {
         "columns": [
             
             { "data": "id", "width": "10%" },
-            { "data": "nombre", "width": "10%" },
-            { "data": "apellido", "width": "10%" },
+            { "data": "nombreCompleto", "width": "20%" },
+            //{ "data": "apellido", "width": "10%" },
             { "data": "telefono", "width": "10%" },
             { "data": "profesion", "width": "10%" },
             { "data": "direccion", "width": "10%" },
@@ -34,7 +65,7 @@ function cargarDatatable() {
                     //loop through all the row details to build output string
                     for (var item in row.alumnoLista) {
                         var r = row.alumnoLista[item];
-                        alumnoLista = alumnoLista + '- ' + r.nombre + '</br>';
+                        alumnoLista = alumnoLista + '- ' + r.carnet + '</br>';
                     }
 
                     return alumnoLista
@@ -55,7 +86,7 @@ function cargarDatatable() {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center card border-primary justify-content-center">
-                            <a href='/Admin/Responsable/Edit/${data}' class='btn btn-success btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <a href='/Admin/Responsables/Edit/${data}' class='btn btn-success btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-edit'></i> Editar
                             </a>
                             &nbsp;
@@ -108,64 +139,30 @@ function cargarDatatable() {
 }
 
 
-//function Delete(url) {
-//    swal({
-//        title: "¿Esta seguro de borrar?",
-//        text: "¡Este contenido no se puede recuperar!",
-//        type: "warning",
-//        showCancelButton: true,
-//        confirmButtonColor: "#DD6B55",
-//        confirmButtonText: "Si, ¡borrar!",
-//        closeOnconfirm: true
-//    }, function () {
-//        $.ajax({
-//            type: 'DELETE',
-//            url: url,
-//            success: function (data) {
-//                if (data.success) {
-//                    toastr.success(data.message);
-//                    dataTable.ajax.reload();
-//                }
-//                else {
-//                    toastr.error(data.message);
-//                }
-//            }
-//        });
-//    });
-//}
-
-
-
-
-
-
-
-
-
-
 function Delete(url) {
     swal({
-        title: "Are you sure you want to Delete?",
-        text: "You will not be able to restore the data!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-    }).then((willDelete) => {
-        if (willDelete) {
-            $.ajax({
-                type: "DELETE",
-                url: url,
-                success: function (data) {
-                    if (data.success) {
-                        toastr.success(data.message);
-                        dataTable.ajax.reload();
-                    }
-                    else {
-                        toastr.error(data.message);
-                    }
+        title: "¿Esta seguro de borrar?",
+        text: "¡Este contenido no se puede recuperar!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, ¡borrar!",
+        closeOnconfirm: true
+    }, function () {
+        $.ajax({
+            type: 'DELETE',
+            url: url,
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message);
+                    dataTable.ajax.reload();
                 }
-            });
-        }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
     });
 }
+
 
