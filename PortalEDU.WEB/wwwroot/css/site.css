@@ -69,3 +69,163 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+
+
+
+
+
+/* Aqui empieza univertity*/
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/*Links*/
+
+a, a:hover {
+    text-decoration: none;
+}
+
+    /*Blog article*/
+    a.article-card-link {
+        color: #212529;
+    }
+
+        a.article-card-link .card {
+            box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.2);
+        }
+
+        a.article-card-link:hover .card {
+            box-shadow: 8px 8px 5px 0px rgba(0,0,0,0.3);
+        }
+
+        a.article-card-link:hover .card-body {
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
+
+        a.article-card-link:hover .card-footer {
+            color: #ffffff;
+            background-color: #28a745;
+        }
+/*Tiny MCE notifications*/
+div.tox-notifications-container {
+    display: none;
+}
+
+/*Courses*/
+.bg-gradient {
+    background-image: linear-gradient(to bottom right, #0e6471, #33cee6);
+    color: white;
+}
+
+.card.course-card {
+    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.2);
+}
+
+    .card.course-card:hover {
+        box-shadow: 8px 8px 10px 0px rgba(0,0,0,0.4);
+    }
+
+    .card.course-card .card-header,
+    .card.course-card .card-body,
+    .card.course-card .card-footer {
+        text-align: center;
+    }
+
+    .card.course-card .card-header {
+        color: white;
+    }
+
+    .card.course-card .card-footer {
+        background-color: transparent;
+    }
+
+/*Certificate*/
+
+section.certificate-details,
+section.diploma-details {
+    width: 100%;
+    padding-top: 150px;
+}
+
+.certificate-details,
+.certificate-details:hover {
+    color: #ffffff;
+    background-color: #c47a23;
+}
+
+.diploma-details,
+.diploma-details:hover {
+    color: #ffffff;
+    background-color: #234465;
+}
+
+button.certificate-dload:hover i.fa {
+    color: #c47a23;
+}
+
+
+button.diploma-dload:hover i.fa {
+    color: #234465;
+}
+
+
+/*Orders*/
+.order-item {
+    display: none;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+}

@@ -1,8 +1,12 @@
-﻿@{
-ViewData["Title"] = "Portal Educativo ";
-}
+﻿@model PortalEDU.Models.ViewModels.HomeVM
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenidos</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{ ViewData["Title"] = "Home Page"; }
+<br />  
+<partial name="_WelcomePartial" />
+
+<header class="d-flex flex-wrap justify-content-between align-items-center">
+    <h1>Aqui van los salones</h1>
+    @*<partial name="_SearchPartial" for="Search" />*@
+</header>
+
+<partial name="_AulaCardPartial" model="@Model" />

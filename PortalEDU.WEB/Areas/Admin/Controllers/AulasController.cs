@@ -59,6 +59,13 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
+        public IActionResult CardAulas() {
+
+
+            return View();
+        }
+
+
 
         [HttpGet]
         public IActionResult Edit(int id)

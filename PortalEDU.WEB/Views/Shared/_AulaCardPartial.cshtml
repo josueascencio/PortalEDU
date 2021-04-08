@@ -1,0 +1,81 @@
+﻿@model PortalEDU.Models.ViewModels.HomeVM
+
+
+@if (Model != null)
+{
+
+    var btnEvaluateStyle = true ? "btn-info" : "btn-outline-info";
+<section class="d-flex flex-wrap card-deck">
+    @foreach (var aulas1 in Model.AulaEnVM.OrderBy(o => o.CentroEducativo.Nombre))
+    {
+
+
+        <article class="card-group col-sm-6 col-lg-3 my-2">
+            <div class="card course-card border-info">
+                <div class="card-header bg-info small d-flex flex-wrap justify-content-between">
+                    <div><i class="fa fa-clock"></i> Inicio</div>
+                    <div><i class="fa fa-hourglass"></i>Fin</div>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="~/imagenes/aulas/abc.png" alt="Aula" class="w-100" />
+                    </div>
+                </div>
+                <div class="card-body d-flex justify-content-center align-items-center">
+                    <h5 class="card-title text-center">@aulas1.Nombre</h5>
+                </div>
+
+                @*@if (Model.TrainerName != null)
+        {*@
+                 <div class="card-footer">@aulas1.CentroEducativo.Nombre</div>
+               
+                    @*@if (Model.IsActive)
+            {*@
+                    <div class="card-footer text-uppercase shadow">
+                        <div class="bg-success text-white shadow py-2">@aulas1.Seccion</div>
+                    </div>
+                    @*else if (Model.IsUpcoming)
+            {
+                <div class="card-footer text-uppercase shadow">
+                    <div class="bg-info text-white shadow py-2">Upcoming</div>
+                </div>}*@
+
+                    @*<div class="card-footer d-flex flex-wrap justify-content-around align-items-center">
+               @{ var courseModel = new CourseBasicViewModel { Id = Model.Id, Name = Model.Name }; }
+               <partial name="_CourseInfoButtonPartial" model="@courseModel" />
+
+               @if (Model.CanEnroll)
+               {
+                   if (Model.Price == 0)
+                   {
+                       <partial name="_CourseEnrollFormPartial" for="Id" /> }
+                   else
+                   {
+                       <partial name="_CourseAddToCartButtonPartial" for="Id" />}
+               }
+
+               @if (User.IsInRole(WebConstants.TrainerRole)
+            && User.Identity.Name == Model.TrainerUserName)
+               {*@
+                    <a asp-area="Admin"
+                       asp-controller="Alumnos"
+                       asp-action="index"
+                       asp-route-id="" class="btn @btnEvaluateStyle" data-toggle="tooltip" title="Students">
+                        <i class="fas fa-chalkboard-teacher"> Ingresar</i>
+                    </a>
+                    @*<a asp-controller="Alumnos"
+               asp-action="Index"
+               asp-route-id="" class="btn btn-outline-info" data-toggle="tooltip" title="Resources">
+                <i class="fa fa-folder-open"></i>
+            </a>*@
+
+                    @*<partial name="_AdminCourseActionsPartial" for="Id" />*@
+
+                </div>
+        </article>
+
+    }
+</section>
+        
+        
+        }

@@ -41,6 +41,8 @@ namespace PortalEDU.AccesoDatos.Data
             objDesdeDb.Tipo = centroEducativo.Tipo;
             objDesdeDb.Director = centroEducativo.Director;
             objDesdeDb.IdAnioAcademico = centroEducativo.IdAnioAcademico;
+            objDesdeDb.AulasLista = centroEducativo.AulasLista;
+            objDesdeDb.DocentesLista = centroEducativo.DocentesLista;
 
             _db.SaveChanges();
         }

@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Portal Educativo </title>
+
+
+
+
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <!--Css todos-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
@@ -40,14 +45,15 @@
                         <a class="nav-link" asp-area="Admin" asp-controller="Aulas" asp-action="Index">Aula</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Cursos" asp-action="Index">Cursos</a>
                     </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion de Usuarios</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumno</a>
                             <a class="dropdown-item" asp-area="Admin" asp-controller="Docentes" asp-action="Index">Docente</a>
-                            <a class="dropdown-item" asp-area="Admin" asp-controller="Responsables" asp-action="Index">Padre</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="Responsables" asp-action="Index">Responsable</a>
                             @*<div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>*@
                         </div>
@@ -59,14 +65,16 @@
                         <input class="form-control mr-sm-2" type="text" placeholder="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                     </form>*@
+
+
                 <partial name="_LoginPartial" />
             </div>
         </nav>
 
-
-
-
     </header>
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -78,6 +86,9 @@
             &copy; 2021 - PortalEDU.WEB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!--Js plugins-->

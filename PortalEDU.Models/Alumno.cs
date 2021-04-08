@@ -51,7 +51,7 @@ namespace PortalEDU.Models
         
         [ForeignKey("IdResponsable")]
         public virtual Responsable Responsable { get; set; }
-        //public virtual ICollection<AlumnoCurso> AlumnoCursos { get; set; }
+        public virtual ICollection<AlumnoCurso> AlumnoCursos { get; set; }
         //public virtual ICollection<Calificacione> Calificaciones { get; set; }
         //public virtual ICollection<ResponsableAlumno> ResponsableAlumnos { get; set; }
         //public virtual ICollection<TareaAlumno> TareaAlumnos { get; set; }

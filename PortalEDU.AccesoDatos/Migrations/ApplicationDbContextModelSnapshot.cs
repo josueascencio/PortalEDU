@@ -241,7 +241,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Foto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdCentroEducativo")
@@ -431,9 +430,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Aviso")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
@@ -449,21 +445,15 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<int>("IdAula")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdAulaNavigationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Imagen")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("update")
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAulaNavigationId");
+                    b.HasIndex("IdAula");
 
                     b.ToTable("Curso");
                 });
@@ -485,7 +475,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Foto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GradoAcademico")
@@ -567,7 +556,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Foto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
@@ -618,29 +606,23 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<string>("Comnetario")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Documento")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Documento")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdAlumno")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdAlumnoNavigationId")
                         .HasColumnType("int");
 
                     b.Property<int>("IdTareaDocente")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdTareaDocenteNavigationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("update")
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAlumnoNavigationId");
+                    b.HasIndex("IdAlumno");
 
-                    b.HasIndex("IdTareaDocenteNavigationId");
+                    b.HasIndex("IdTareaDocente");
 
                     b.ToTable("TareaAlumno");
                 });
@@ -658,8 +640,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Documento")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Documento")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Estado")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("FechaCreacion")
                         .HasColumnType("datetime2");
@@ -667,10 +652,10 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<DateTime?>("FechaFinalizacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdDocente")
+                    b.Property<int?>("IdCurso")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdDocenteNavigationId")
+                    b.Property<int?>("IdDocente")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
@@ -679,12 +664,14 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<int?>("Puntuacion")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("update")
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdDocenteNavigationId");
+                    b.HasIndex("IdCurso");
+
+                    b.HasIndex("IdDocente");
 
                     b.ToTable("TareaDocente");
                 });
@@ -781,7 +768,7 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("PortalEDU.Models.AlumnoCurso", b =>
                 {
                     b.HasOne("PortalEDU.Models.Alumno", "IdAlumnoNavigation")
-                        .WithMany()
+                        .WithMany("AlumnoCursos")
                         .HasForeignKey("IdAlumnoNavigationId");
 
                     b.HasOne("PortalEDU.Models.Curso", "IdCursoNavigation")
@@ -796,7 +783,7 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("PortalEDU.Models.Aula", b =>
                 {
                     b.HasOne("PortalEDU.Models.CentroEducativo", "CentroEducativo")
-                        .WithMany()
+                        .WithMany("AulasLista")
                         .HasForeignKey("IdCentroEducativo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -826,17 +813,19 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Curso", b =>
                 {
-                    b.HasOne("PortalEDU.Models.Aula", "IdAulaNavigation")
+                    b.HasOne("PortalEDU.Models.Aula", "Aula")
                         .WithMany()
-                        .HasForeignKey("IdAulaNavigationId");
+                        .HasForeignKey("IdAula")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("IdAulaNavigation");
+                    b.Navigation("Aula");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Docente", b =>
                 {
                     b.HasOne("PortalEDU.Models.CentroEducativo", "CentroEducativo")
-                        .WithMany()
+                        .WithMany("DocentesLista")
                         .HasForeignKey("IdCentroEducativo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -861,26 +850,48 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.TareaAlumno", b =>
                 {
-                    b.HasOne("PortalEDU.Models.Alumno", "IdAlumnoNavigation")
+                    b.HasOne("PortalEDU.Models.Alumno", "Alumno")
                         .WithMany()
-                        .HasForeignKey("IdAlumnoNavigationId");
+                        .HasForeignKey("IdAlumno")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("PortalEDU.Models.TareaDocente", "IdTareaDocenteNavigation")
+                    b.HasOne("PortalEDU.Models.TareaDocente", "TareDocente")
                         .WithMany("TareaAlumnos")
-                        .HasForeignKey("IdTareaDocenteNavigationId");
+                        .HasForeignKey("IdTareaDocente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("IdAlumnoNavigation");
+                    b.Navigation("Alumno");
 
-                    b.Navigation("IdTareaDocenteNavigation");
+                    b.Navigation("TareDocente");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.TareaDocente", b =>
                 {
-                    b.HasOne("PortalEDU.Models.Docente", "IdDocenteNavigation")
-                        .WithMany()
-                        .HasForeignKey("IdDocenteNavigationId");
+                    b.HasOne("PortalEDU.Models.Curso", "Curso")
+                        .WithMany("TareaDocente")
+                        .HasForeignKey("IdCurso");
 
-                    b.Navigation("IdDocenteNavigation");
+                    b.HasOne("PortalEDU.Models.Docente", "Docente")
+                        .WithMany()
+                        .HasForeignKey("IdDocente");
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Docente");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.Alumno", b =>
+                {
+                    b.Navigation("AlumnoCursos");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.CentroEducativo", b =>
+                {
+                    b.Navigation("AulasLista");
+
+                    b.Navigation("DocentesLista");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Curso", b =>
@@ -888,6 +899,8 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Navigation("AlumnoCursos");
 
                     b.Navigation("DocenteCursos");
+
+                    b.Navigation("TareaDocente");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Responsable", b =>

@@ -1,0 +1,15 @@
+﻿@model PortalEDU.Models.ViewModels.HomeVM
+
+@if (Model.ListaAulas.Count() > 0)
+{
+<section class="d-flex flex-wrap card-deck">
+    @foreach (var aulas1 in Model.ListaAulas.OrderBy(o => o.Id))
+    {
+    <partial name="_AulaCardPartial" />
+    }
+</section> 
+}
+else
+{
+<h4>No Aulas</h4>
+}

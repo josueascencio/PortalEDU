@@ -38,6 +38,8 @@ namespace PortalEDU.AccesoDatos.Data
             objDesdeDb.Seccion = aula.Seccion;
             objDesdeDb.IdCentroEducativo = aula.IdCentroEducativo;
             objDesdeDb.update = aula.update;
+            objDesdeDb.CentroEducativo = aula.CentroEducativo;
+            
 
             //objDesdeDb.CentroEducativos = ciclo.CentroEducativos;
 

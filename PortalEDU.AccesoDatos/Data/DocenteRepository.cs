@@ -44,6 +44,7 @@ namespace PortalEDU.AccesoDatos.Data
             objDesdeDb.Sexo = docente.Sexo;
             objDesdeDb.update = docente.update;
             objDesdeDb.IdCentroEducativo = docente.IdCentroEducativo;
+            objDesdeDb.CentroEducativo = docente.CentroEducativo;
             
             _db.SaveChanges();
         }

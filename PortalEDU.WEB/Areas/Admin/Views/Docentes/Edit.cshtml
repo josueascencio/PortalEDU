@@ -4,7 +4,9 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
 
+</head>
 
 <br />
 <br />
@@ -61,7 +63,7 @@
                     <label asp-for="docente.FechaNacimiento"> </label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="docente.FechaNacimiento" class="form-control" />
+                    <input type="datetime" class="form-control" asp-for="docente.FechaNacimiento" />
                     <span asp-validation-for="docente.FechaNacimiento" class="text-danger"> </span>
                 </div>
             </div>
@@ -187,7 +189,6 @@
         }
 
     </script>
-
 
 
 }

@@ -37,7 +37,7 @@ namespace PortalEDU.Models
 
         [ForeignKey("IdAnioAcademico")]
         public  Ciclo Ciclo { get; set; }
-        //public virtual ICollection<Aula> Aulas { get; set; }
-        //public virtual ICollection<Docente> Docentes { get; set; }
+        public virtual ICollection<Aula> AulasLista { get; set; }
+        public virtual ICollection<Docente> DocentesLista { get; set; }
     }
 }

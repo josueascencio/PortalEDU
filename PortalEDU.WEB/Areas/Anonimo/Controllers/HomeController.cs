@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PortalEDU.AccesoDatos.Data;
+using PortalEDU.AccesoDatos.Data.Repository;
 using PortalEDU.Models;
+using PortalEDU.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,17 +15,42 @@ namespace PortalEDU.WEB.Controllers
     [Area("Anonimo")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IContenedorTrabajo _contenedorTrabajo;
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(IContenedorTrabajo contenedorTrabajo, ApplicationDbContext context)
         {
-            _logger = logger;
+            _contenedorTrabajo = contenedorTrabajo;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+           
+            HomeVM homeVM = new HomeVM()
+            {
+                ListaAulas = _contenedorTrabajo.Aula.GetAll(),
+                ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetAll(),
+                //AulaEnVM = new Aula(),
+                //CentroEduEnVM = new CentroEducativo(),
+                
+                AulaEnVM = _contenedorTrabajo.Aula.GetAll().ToList(),
+                CentroEduEnVM = _contenedorTrabajo.CentroEducativo.GetFirstOrDefault()
+
+
+
+            };
+
+
+            return View(homeVM);
         }
+
+
+    
+
+
 
         public IActionResult Privacy()
         {
@@ -34,5 +62,6 @@ namespace PortalEDU.WEB.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

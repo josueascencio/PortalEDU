@@ -19,6 +19,7 @@ namespace PortalEDU.AccesoDatos.Data
             Alumno = new AlumnoRepository(_db);
             Docente = new DocenteRepository(_db);
             Responsable = new ResponsableRepository(_db);
+            Curso = new CursoRepository(_db);
             //Articulo = new ArticuloRepository(_db);
             //Slider = new SliderRepository(_db);
             //Usuario = new UsuarioRepository(_db);
@@ -29,8 +30,8 @@ namespace PortalEDU.AccesoDatos.Data
         public IAulaRepository Aula { get; private set; }
         public IAlumnoRepository Alumno { get; private set; }
         public IDocenteRepository Docente { get; private set; }
-
         public IResponsableRepository Responsable { get; private set; }
+        public ICursoRepository Curso { get; private set; }
         //public IArticuloRepository Articulo { get; private set; }
         //public ISliderRepository Slider { get; private set; }
         //public IUsuarioRepository Usuario { get; private set; }

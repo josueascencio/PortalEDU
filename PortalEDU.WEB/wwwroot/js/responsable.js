@@ -6,9 +6,8 @@ $(document).ready(function () {
 
 
 function cargarDatatable() {
+    var printCounter = 0;
     dataTable = $("#tblResponsables").DataTable({
-
-
 
         dom: 'Bfrtip',
         buttons: [
@@ -38,6 +37,13 @@ function cargarDatatable() {
         ],
 
 
+
+        scrollCollapse: true,
+        scrollCollapse: true,
+        autoWidth: true,
+        paging: true,
+
+
         "ajax": {
             "url": "/admin/responsables/GetAll",
             "type": "GET",
@@ -47,7 +53,6 @@ function cargarDatatable() {
             
             { "data": "id", "width": "10%" },
             { "data": "nombreCompleto", "width": "20%" },
-            //{ "data": "apellido", "width": "10%" },
             { "data": "telefono", "width": "10%" },
             { "data": "profesion", "width": "10%" },
             { "data": "direccion", "width": "10%" },
@@ -135,7 +140,7 @@ function cargarDatatable() {
             }
         },
         "width": "100%"
-    });
+    }).columns.adjust().draw();
 }
 
 
