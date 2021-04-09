@@ -10,13 +10,15 @@ namespace PortalEDU.Models.ViewModels
 
         public Aula AulaEnVM { get; set; }
 
+        public Curso curso { get; set; }
+
         public IEnumerable<Curso> ListaCursos { get; set; }
 
-        public Curso CursoEnVM { get; set; }
+        public List<Curso> CursoEnVM { get; set; }
 
         public IEnumerable<Docente> ListaDocentes { get; set; }
 
-        public Docente DocenteEnVM { get; set; }
+        public List<Docente> DocenteEnVM { get; set; }
 
         public IEnumerable<CentroEducativo> ListaCentroEducativo { get; set; }
 
@@ -25,6 +27,13 @@ namespace PortalEDU.Models.ViewModels
         public IEnumerable<TareaDocente> ListaTareas { get; set; }
 
         public TareaDocente TareaDocenteEnVM { get; set; }
+
+        public List<Alumno> AlumnoEnVM { get; set; }
+
+        public IEnumerable<Alumno> ListaAlumnos { get; set; }
+
+
+
 
     }
 }

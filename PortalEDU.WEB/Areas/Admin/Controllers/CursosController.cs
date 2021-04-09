@@ -27,8 +27,33 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         // GET: Admin/Cursoes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Curso.Include(c => c.Aula);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.Curso.Include(c => c.Aula);
+            //return View(await applicationDbContext.ToListAsync());
+
+            CursoCardVM cursoCardVM = new CursoCardVM()
+            {
+                curso = new Curso(),
+                ListaAulas =  _contenedorTrabajo.Aula.GetAll(),
+                ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetAll(),
+                //AulaEnVM = new Aula(),
+                //CentroEduEnVM = new CentroEducativo(),
+
+                CursoEnVM = _contenedorTrabajo.Curso.GetAll().ToList(),
+
+                DocenteEnVM = _contenedorTrabajo.Docente.GetAll().ToList(),
+
+                AlumnoEnVM = _contenedorTrabajo.Alumno.GetAll().ToList(),
+
+                ListaCursos = _contenedorTrabajo.Curso.GetAll(),
+                //AulaEnVM = _contenedorTrabajo.Aula.GetAll().ToList(),
+                CentroEduEnVM = _contenedorTrabajo.CentroEducativo.GetFirstOrDefault(),
+
+               
+
+        };
+          
+
+            return View (cursoCardVM);
         }
 
         // GET: Admin/Cursoes/Details/5
@@ -171,7 +196,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             CursoCardVM homeVM = new CursoCardVM()
             {
-                CursoEnVM = new Curso(),
+                //CursoEnVM = new Curso(),
                 ListaAulas = _contenedorTrabajo.Aula.GetAll(),
                 ListaDocentes = _contenedorTrabajo.Docente.GetAll(),
                 //ListaTareas = _contenedorTrabajo.TareaDocente.GetAll(),

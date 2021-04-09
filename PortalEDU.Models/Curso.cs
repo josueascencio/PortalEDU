@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using PortalEDU.Utilidades;
 
 #nullable disable
 
@@ -28,10 +29,17 @@ namespace PortalEDU.Models
         [Required]
         public DateTime Update { get; set; }
 
+
+        //[NotMapped]
+        //public int Duration
+        //    => this.FechaInicio.DaysTo(this.FechaFinal);
+
+
+
         [ForeignKey("IdAula")]
         public virtual Aula Aula { get; set; }
         public virtual ICollection<AlumnoCurso> AlumnoCursos { get; set; }
-        public virtual ICollection<DocenteCurso> DocenteCursos { get; set; }
+        public virtual ICollection<DocenteCurso> DocenteCursos { get; set; } = new List<DocenteCurso>();
         public virtual ICollection<TareaDocente> TareaDocente { get; set; }
     }
 }
