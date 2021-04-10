@@ -39,12 +39,13 @@ namespace PortalEDU.AccesoDatos.Data
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Docente> Docente { get; set; }
         public DbSet<DocenteCurso> DocenteCurso { get; set; }
-        public DbSet<Padre> Padre { get; set; }
+        //public DbSet<Padre> Padre { get; set; }
         public DbSet<Responsable> Responsable { get; set; }
-        public DbSet<Rol> Rol { get; set; }
+        //public DbSet<Rol> Rol { get; set; }
         public DbSet<TareaAlumno> TareaAlumno { get; set; }
         public DbSet<TareaDocente> TareaDocente { get; set; }
-        public DbSet<UsuarioSesion> UsuarioSesion { get; set; }
+        public DbSet<Sala> Sala { get; set; }
+        //public DbSet<UsuarioSesion> UsuarioSesion { get; set; }
 
 
 

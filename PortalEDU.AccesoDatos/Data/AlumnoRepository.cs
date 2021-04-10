@@ -44,6 +44,7 @@ namespace PortalEDU.AccesoDatos.Data
             objDesdeDb.update = alumno.update;
             objDesdeDb.IdCentroEducativo = alumno.IdCentroEducativo;
             objDesdeDb.IdResponsable = alumno.IdResponsable;
+            objDesdeDb.AlumnoCursos = alumno.AlumnoCursos;
             _db.SaveChanges();
         }
 

@@ -6,6 +6,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410154257_DeleteRol.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410154257_DeleteRol.Designer.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155241_Deletetables.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155241_Deletetables.Designer.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155543_modifyalumnocurso.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155543_modifyalumnocurso.Designer.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155817_modifyalumnocursoKey.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410155817_modifyalumnocursoKey.Designer.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410160251_deletealumnocurso.cs" />
+    <Content Remove="wwwroot\Archivos\MigrationsBK\20210410160251_deletealumnocurso.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410154257_DeleteRol.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410154257_DeleteRol.Designer.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155241_Deletetables.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155241_Deletetables.Designer.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155543_modifyalumnocurso.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155543_modifyalumnocurso.Designer.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155817_modifyalumnocursoKey.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410155817_modifyalumnocursoKey.Designer.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410160251_deletealumnocurso.cs" />
+    <Compile Include="wwwroot\Archivos\MigrationsBK\20210410160251_deletealumnocurso.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
