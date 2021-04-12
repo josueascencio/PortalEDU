@@ -1,0 +1,28 @@
+﻿@model PortalEDU.Models.AlumnoCurso
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Curso.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => modelItem.Curso.FechaFinal)
+        </td>
+        <td>
+            <a eval="deleteEnrollment($this, data)" href="@Url.Action("deleteEnrollment",new { enrollmentID =Model.IdAlumnoCurso})"
+               type="button" class="btn btn-warning btn-circle">
+                <i class="fas fa-trash"></i>
+            </a>
+
+
+        </td>
+
+    </tr>
+
+    @*<script>
+        function deleteEnrollment($this, data) {
+            if (data == true) {
+                $this.closest('tr').remove();
+
+            }
+        }
+    </script>*@

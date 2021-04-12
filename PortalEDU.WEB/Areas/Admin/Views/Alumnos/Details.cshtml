@@ -1,0 +1,181 @@
+﻿@model PortalEDU.Models.Alumno
+
+@{
+    ViewData["Title"] = "Detalles";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h3>Detalles personales</h3>
+
+
+
+
+<div>
+    <h4>Alumno</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Carnet)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Carnet)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaNacimiento)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaNacimiento)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Foto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Foto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Sexo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sexo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.update)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.update)
+        </dd>
+
+        <dd class="col-sm-10 card-body">
+            <a type="button" href="@Url.Action("_AddCourseModal",new { studentID =Model.Id})" data-toggle="modal" , data-target="#globalModal" ajax-target="#globalModalContent" data-modal="" class="btn btn-primary btn-circle">
+                
+                    <i class="fas fa-plus-square" ></i>  Agregar Cursos
+                
+            </a>
+        </dd>
+
+        <dd> &nbsp;</dd>
+        <dd><hr /></dd>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Curso </th>
+                    <th>Finaliza </th>
+                    <th></th>
+                </tr>
+                <tbody id="tblEnrollment">
+
+                    @foreach (var item in Model.AlumnoCursos)
+                    {
+                        await Html.RenderPartialAsync("_Details", item);@*<tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Course.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Grade)
+                                </td>
+                            </tr>*@}
+                </tbody>
+            </table>
+        </dd>
+        @*<dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.CentroEducativo)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.CentroEducativo.Correo)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Responsable)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Responsable.Id)
+            </dd>*@
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
+
+@*<script>
+    function deleteEnrollment($this, data) {
+        if (data == true) {
+            $this.closest('tr').remove();
+
+        }
+    }
+</script>*@
+
+
+
+
+@*Necesario para mosdtrar el modal*@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+@*Este modal mejor utilizarlo con "a" de tipo button*@
+
+<script>
+    $(function () {
+
+        $.ajaxSetup({ cache: false });
+
+        $("a[data-modal]").on("click", function (e) {
+
+            $('#globalModalContent').load(this.href, function () {
+
+
+                $('#globalModal').modal({
+                    /*backdrop: 'static',*/
+                    keyboard: true
+                }, 'show');
+
+            });
+
+            return false;
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<PortalEDU.Models.Curso>
+
+
+<div class="modal-header">
+    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+    <h4 class="modal-title">Asignar Cursos </h4>
+</div>
+
+
+<div class="modal-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.FechaInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaFinal)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Update)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Aula.CentroEducativo.Nombre)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaFinal)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Update)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Aula.CentroEducativo.Nombre)
+                    </td>
+                    <td>
+                        <a eval="addEnrollment($ajaxTarget, $this, data)" ajax-target="#tblEnrollment" asp-action="addEnrollment" asp-route-IdCurso="@item.Id" asp-route-IdAlumno="@ViewBag.StudentID">Add</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function addEnrollment($ajaxTarget, $this, data) {
+        $ajaxTarget.append(data);
+        $this.closest('tr').remove();
+
+    }
+</script>
+
+
+
+

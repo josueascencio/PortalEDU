@@ -45,6 +45,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Rick.Docs.Samples.RouteInfo" Version="1.0.0.4" />
     <PackageReference Include="Vereyon.Web.FlashMessage" Version="2.0.0" />
   </ItemGroup>
 
@@ -54,6 +55,24 @@
     <Folder Include="Areas\Padre\Controllers\" />
     <Folder Include="wwwroot\imagenes\alumnos\" />
     <Folder Include="wwwroot\imagenes\docentes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\grunt\.jshintrc" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\change-version.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="wwwroot\SPA\inline.gif" />
+    <None Include="wwwroot\SPA\loading.gif" />
+    <None Include="wwwroot\SPA\readme.txt" />
+    <None Include="wwwroot\SPA\sm-loader.gif" />
+    <None Include="wwwroot\SPA\toufiqElahySPA.css" />
+    <None Include="wwwroot\SPA\toufiqElahySPA.js" />
   </ItemGroup>
 
   <ItemGroup>

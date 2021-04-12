@@ -20,7 +20,13 @@ namespace PortalEDU.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? FechaInicio { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? FechaFinal { get; set; }
         //public string Aviso { get; set; }
         //public string Imagen { get; set; }

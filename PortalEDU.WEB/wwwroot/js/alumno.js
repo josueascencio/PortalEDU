@@ -35,7 +35,7 @@ function cargarDatatable() {
                     return `<img src="../${foto}" width="100">`
                 }
             },
-            
+
             {
                 "data": "id",
                 "render": function (data) {
@@ -46,6 +46,11 @@ function cargarDatatable() {
                             &nbsp;
                             <a onclick=Delete("/Admin/Alumnos/Delete/${data}") class='btn btn-danger btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-trash-alt'></i> Borrar
+                            </a>
+                            &nbsp;
+                            <div class="text-center card border-primary justify-content-center">
+                            <a href='/Admin/Alumnos/Details/${data}' class='btn btn-info btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <i class='fas fa-edit'></i> Detalles
                             </a>
                             `;
                 }, "width": "1%"
