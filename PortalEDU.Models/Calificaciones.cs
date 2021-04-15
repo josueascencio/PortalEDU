@@ -9,22 +9,22 @@ namespace PortalEDU.Models
 {
     public partial class Calificaciones
     {
-        [Key]
-        public int Id { get; set; }
+        
+        public int? Id { get; set; }
         [Column(TypeName = "decimal (18,4)")]
-        public decimal PrimerTrimestre { get; set; }
+        public decimal? PrimerTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]
-        public decimal SegundoTrimestre { get; set; }
+        public decimal? SegundoTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]
-        public decimal TercerTrimestre { get; set; }
+        public decimal? TercerTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]
-        public decimal CuartoTrimestre { get; set; }
+        public decimal? CuartoTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]
-        public decimal Promedio { get; set; }
+        public decimal? Promedio { get; set; }
         public int IdAlumno { get; set; }
         [Required]
-        public DateTime update { get; set; }
-
-        public virtual Alumno IdAlumnoNavigation { get; set; }
+        public DateTime Update { get; set; }
+        [ForeignKey("IdAlumno")]
+        public virtual Alumno Alumno { get; set; }
     }
 }

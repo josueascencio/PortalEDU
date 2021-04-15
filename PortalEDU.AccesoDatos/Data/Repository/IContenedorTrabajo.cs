@@ -13,6 +13,7 @@ namespace PortalEDU.AccesoDatos.Data.Repository
         IDocenteRepository Docente { get; }
         IResponsableRepository Responsable { get; }
         ICursoRepository Curso { get; }
+        ICalificacionesRepository Calificaciones { get; }
 
 
         void Save();

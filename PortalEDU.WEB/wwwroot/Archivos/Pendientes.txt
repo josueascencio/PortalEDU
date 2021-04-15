@@ -4,6 +4,5 @@ Falta agregar excepciones por borrado en cascada da error por la integridad refe
 Falñta crear las acciones de la entidad CIclo 
 Falta Agregar data annotattions a todas las entidades del modelo
 Revisar que al momento de editzr no se conservan las fechas 
-
-Tomar como ejemplo 
+Mejorar el enrolamiento de los cursos.
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalEDU.AccesoDatos.Data;
 
 namespace PortalEDU.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210413064501_ModifyCalificacionesTable")]
+    partial class ModifyCalificacionesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +245,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IdCalificaciones")
-                        .HasColumnType("int");
-
                     b.Property<int>("IdCentroEducativo")
                         .HasColumnType("int");
 
@@ -263,8 +262,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdCalificaciones");
 
                     b.HasIndex("IdCentroEducativo");
 
@@ -328,7 +325,7 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Calificaciones", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -719,10 +716,6 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Alumno", b =>
                 {
-                    b.HasOne("PortalEDU.Models.Calificaciones", "Calificaciones")
-                        .WithMany()
-                        .HasForeignKey("IdCalificaciones");
-
                     b.HasOne("PortalEDU.Models.CentroEducativo", "CentroEducativo")
                         .WithMany()
                         .HasForeignKey("IdCentroEducativo")
@@ -732,8 +725,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.HasOne("PortalEDU.Models.Responsable", "Responsable")
                         .WithMany("AlumnoLista")
                         .HasForeignKey("IdResponsable");
-
-                    b.Navigation("Calificaciones");
 
                     b.Navigation("CentroEducativo");
 
