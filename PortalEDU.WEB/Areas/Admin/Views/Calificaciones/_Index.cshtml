@@ -1,15 +1,5 @@
 ﻿@model IEnumerable<PortalEDU.Models.Calificaciones>
-@using PortalEDU.Models.ViewModels 
-<head>
-    @*Cuando no hay registros en las celdas*@
-    <style>
-        table td:empty::before {
-            content: "Sin registros";
-            color: brown;
-        }
-    </style>
 
-</head>
 
 @foreach (var item in Model)
 {
@@ -18,7 +8,7 @@
         @Html.DisplayFor(modelItem => item.Alumno.Nombre)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.PrimerTrimestre) 
+        @Html.DisplayFor(modelItem => item.PrimerTrimestre)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.SegundoTrimestre)
@@ -29,9 +19,11 @@
     <td>
         @Html.DisplayFor(modelItem => item.CuartoTrimestre)
     </td>
-    @*<td>
-        <a eval="editCourse($this, data)" asp-action="Edit" asp-route-id="@item.Calificaciones.Id">Edit</a> |
-        <a asp-action="Details" asp-route-id="@item.Calificaciones.Id">Details</a> |
-        <a eval="deleteCourse($this, data)" asp-action="Delete" asp-route-id="@item.Calificaciones.Id">Delete</a>
-    </td>*@
-</tr>}
+    <td>
+        <a eval="editCourse($this, data)" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        @*<a asp-action="Details" asp-route-id="@item.Calificaciones.Id">Details</a> |*@
+        <a eval="deleteCourse($this, data)" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+</tr>
+}
+

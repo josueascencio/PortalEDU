@@ -10,7 +10,7 @@ namespace PortalEDU.Models
     public partial class Calificaciones
     {
         
-        public int? Id { get; set; }
+        public int Id { get; set; }
         [Column(TypeName = "decimal (18,4)")]
         public decimal? PrimerTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PortalEDU.AccesoDatos.Data;
 using PortalEDU.AccesoDatos.Data.Repository;
@@ -16,142 +17,196 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
     [Area("Admin")]
     public class CalificacionesController : Controller
     {
-
-        private readonly IContenedorTrabajo _contenedorTrabajo;
         private readonly ApplicationDbContext _context;
 
-        public CalificacionesController(IContenedorTrabajo contenedorTrabajo, ApplicationDbContext context)
+        public CalificacionesController(ApplicationDbContext context)
         {
-            _contenedorTrabajo = contenedorTrabajo;
             _context = context;
         }
 
-
-        //public IActionResult Index()
-        //{
-        //    //CentroEducativoVM centroEducativoVM = new CentroEducativoVM()
-        //    //{
-        //    //    centroEducativo = new Models.CentroEducativo(),
-        //    //    ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo()
-        //    //};
-
-        //    return View();
-        //}
-
+        // GET: Courses
         public async Task<IActionResult> Index()
         {
-
-            //CalificacionesVM calificacionesVM = new CalificacionesVM()
-            //{
-            //    calificaciones = new Calificaciones(),
-            //    alumno = new Alumno(),
-
-
-            //    ListaAlumnos = _contenedorTrabajo.Alumno.GetAll(),
-            //    ListaCalificaciones = _contenedorTrabajo.Calificaciones.GetAll(),
-
-
-            //    //alumnos = _contenedorTrabajo.Alumno.GetAll().ToList(),
-            //    //calificacionesList = _contenedorTrabajo.Calificaciones.GetAll().ToList(),
-
-
-            //};
-            //return View(calificacionesVM);
-
-
             var courses = _context.Calificaciones
                 .Include(c => c.Alumno)
                 .AsNoTracking();
             return View(await courses.ToListAsync());
         }
 
+        //        // GET: Courses/Details/5
+        //        public async Task<IActionResult> Details(int? id)
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
 
+        //            var course = await _context.Courses
+        //                .Include(c => c.Department)
+        //                .AsNoTracking()
+        //                .SingleOrDefaultAsync(m => m.CourseID == id);
+        //            if (course == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-        //[HttpGet]
-        //public IActionResult Create()
+        //            return View(course);
+        //        }
+
+        // GET: Courses/Create
+        public IActionResult Create()
+        {
+            PopulateDepartmentsDropDownList();
+            return View();
+        }
+        public IActionResult _Create()
+        {
+            PopulateDepartmentsDropDownList();
+            return View();
+        }
+        ////        [HttpPost]
+        //public async Task<IActionResult> _Create(int[] CourseID, string[] Title, int[] Credits, int[] DepartmentID)
         //{
-        //    CentroEducativoVM centroEducativoVM = new CentroEducativoVM()
+        //    List<Course> courses = new List<Course>();
+        //    for (int i = 0; i < CourseID.Length; i++)
         //    {
-        //        centroEducativo = new Models.CentroEducativo(),
-        //        ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo()
-        //    };
+        //        Course course = new Course();
+        //        course.CourseID = CourseID[i];
+        //        course.Title = Title[i];
+        //        course.Credits = Credits[i];
+        //        course.DepartmentID = DepartmentID[i];
+        //        course.Department = _context.Departments.SingleOrDefault(x => x.DepartmentID == DepartmentID[i]);
+        //        courses.Add(course);
+        //    }
 
-        //    return View(centroEducativoVM);
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Courses.AddRange(courses);
+        //        await _context.SaveChangesAsync();
+        //        return View("_Index", courses);
+        //    }
+        //    return null;
         //}
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public IActionResult Create(CentroEducativoVM centroEducativoVM)
+        //public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")] Course course)
         //{
         //    if (ModelState.IsValid)
         //    {
-        //        _contenedorTrabajo.CentroEducativo.Add(centroEducativoVM.centroEducativo);
-        //        _contenedorTrabajo.Save();
-        //        return RedirectToAction(nameof(Index));
+        //        _context.Add(course);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Index");
         //    }
-        //    centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
-        //    return View(centroEducativoVM);
+        //    PopulateDepartmentsDropDownList(course.DepartmentID);
+        //    return View(course);
         //}
 
+        //        public async Task<IActionResult> Edit(int? id)
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
 
+        //            var course = await _context.Courses
+        //                .AsNoTracking()
+        //                .SingleOrDefaultAsync(m => m.CourseID == id);
+        //            if (course == null)
+        //            {
+        //                return NotFound();
+        //            }
+        //            PopulateDepartmentsDropDownList(course.DepartmentID);
+        //            return View("_Edit", course);
+        //        }
 
+        //        [HttpPost, ActionName("Edit")]
+        //        [ValidateAntiForgeryToken]
+        //        public async Task<IActionResult> EditPost(int? id)
+        //        {
+        //            if (id == null)
+        //            {
+        //                return NotFound();
+        //            }
 
-        //[HttpGet]
-        //public IActionResult Edit(int id)
-        //{
-        //    CentroEducativoVM centroEducativoVM = new CentroEducativoVM();
-        //    centroEducativoVM.centroEducativo = _contenedorTrabajo.CentroEducativo.Get(id);
+        //            var courseToUpdate = await _context.Courses.Include(x => x.Department)
+        //                .SingleOrDefaultAsync(c => c.CourseID == id);
 
-        //    if (centroEducativoVM == null)
-        //    {
-        //        return NotFound();
+        //            if (await TryUpdateModelAsync<Course>(courseToUpdate,
+        //                "",
+        //                c => c.Credits, c => c.DepartmentID, c => c.Title))
+        //            {
+        //                try
+        //                {
+        //                    await _context.SaveChangesAsync();
+        //                }
+        //                catch (DbUpdateException /* ex */)
+        //                {
+        //                    //Log the error (uncomment ex variable name and write a log.)
+        //                    ModelState.AddModelError("", "Unable to save changes. " +
+        //                        "Try again, and if the problem persists, " +
+        //                        "see your system administrator.");
+        //                }
+        //                IList<Course> courses = new List<Course>();
+        //                courses.Add(courseToUpdate);
+        //                return View("_Index", courses);
+        //                //return RedirectToAction("Index");
+        //            }
+        //            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
+        //            return View(courseToUpdate);
+        //        }
 
-        //    }
-        //    centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
-        //    return View(centroEducativoVM);
-        //}
-
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Edit(CentroEducativo centroEducativo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _contenedorTrabajo.CentroEducativo.update(centroEducativo);
-        //        _contenedorTrabajo.Save();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-
-        //    return View(centroEducativo);
-        //}
-
-
-
-        #region LLAMADAS A LA API
-        [HttpGet]
-        public IActionResult GetAll()
+        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
-            return Json(new { data = _contenedorTrabajo.Calificaciones.GetAll(includeProperties: ("Alumnos")) });
+            var departmentsQuery = from d in _context.Alumno
+                                   orderby d.Nombre
+                                   select d;
+            ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "Id", "Nombre", selectedDepartment);
         }
 
-        [HttpDelete]
-        public IActionResult Delete(int id)
-        {
-            var objFromDb = _contenedorTrabajo.Calificaciones.Get(id);
-            if (objFromDb == null)
-            {
-                return Json(new { success = false, message = "Error borrando Calificacion" });
-            }
 
-            _contenedorTrabajo.Calificaciones.Remove(objFromDb);
-            _contenedorTrabajo.Save();
-            return Json(new { success = true, message = "Calificaion borrada con exito" });
-        }
-        #endregion
+        //        // GET: Courses/Delete/5
+        //        public async Task<IActionResult> Delete(int? id)
+        //        {
+        //            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
+        //            _context.Courses.Remove(course);
+        //            await _context.SaveChangesAsync();
+        //            return Json(true);
+        //        }
 
+        //        // POST: Courses/Delete/5
+        //        [HttpPost, ActionName("Delete")]
+        //        [ValidateAntiForgeryToken]
+        //        public async Task<IActionResult> DeleteConfirmed(int id)
+        //        {
+        //            var course = await _context.Courses.SingleOrDefaultAsync(m => m.CourseID == id);
+        //            _context.Courses.Remove(course);
+        //            await _context.SaveChangesAsync();
+        //            return RedirectToAction(nameof(Index));
+        //        }
+
+        //        public IActionResult UpdateCourseCredits()
+        //        {
+        //            return View();
+        //        }
+
+        //        [HttpPost]
+        //        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        //        {
+        //            if (multiplier != null)
+        //            {
+        //                ViewData["RowsAffected"] =
+        //                    await _context.Database.ExecuteSqlCommandAsync(
+        //                        "UPDATE Course SET Credits = Credits * {0}",
+        //                        parameters: multiplier);
+        //            }
+        //            return View();
+        //        }
+
+        //        private bool CourseExists(int id)
+        //        {
+        //            return _context.Courses.Any(e => e.CourseID == id);
+        //        }
     }
-
 
 }

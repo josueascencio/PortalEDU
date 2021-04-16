@@ -1,4 +1,4 @@
-﻿@model PortalEDU.Models.Calificaciones
+﻿@model IEnumerable<PortalEDU.Models.Calificaciones>
 
 @{ ViewData["Title"] = "Calificaciones"; }
 
@@ -47,6 +47,7 @@
 
 
 <script>
+
     function deleteCourse($this, data) {
         if (data == true) {
             $this.closest('tr').remove();

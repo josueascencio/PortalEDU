@@ -1,0 +1,64 @@
+﻿@model PortalEDU.Models.Calificaciones
+
+@{ ViewData["Title"] = "Create"; }
+
+<h2>Create</h2>
+
+<h4>Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrimerTrimestre" class="control-label"></label>
+                <input asp-for="PrimerTrimestre" class="form-control" />
+                <span asp-validation-for="PrimerTrimestre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SegundoTrimestre" class="control-label"></label>
+                <input asp-for="SegundoTrimestre" class="form-control" />
+                <span asp-validation-for="SegundoTrimestre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TercerTrimestre" class="control-label"></label>
+                <input asp-for="TercerTrimestre" class="form-control" />
+                <span asp-validation-for="TercerTrimestre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CuartoTrimestre" class="control-label"></label>
+                <input asp-for="CuartoTrimestre" class="form-control" />
+                <span asp-validation-for="CuartoTrimestre" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Promedio" class="control-label"></label>
+                    <input asp-for="Promedio" class="form-control" />
+                    <span asp-validation-for="Promedio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdAlumno" class="control-label"></label>
+                <select asp-for="IdAlumno" class="form-control" asp-items="ViewBag.DepartmentID">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="IdAlumno" class="text-danger" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+
