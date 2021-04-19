@@ -25,7 +25,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         }
 
         // GET: Admin/Cursoes
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
             //var applicationDbContext = _context.Curso.Include(c => c.Aula);
             //return View(await applicationDbContext.ToListAsync());

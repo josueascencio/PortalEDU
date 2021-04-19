@@ -30,7 +30,7 @@ namespace PortalEDU.AccesoDatos.Data
 
 
 
-        public void update(Ciclo ciclo)
+        public void Update(Ciclo ciclo)
         {
             var objDesdeDb = _db.Ciclo.FirstOrDefault(s => s.Id == ciclo.Id);
             objDesdeDb.AnioAcademico = ciclo.AnioAcademico;

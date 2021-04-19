@@ -157,7 +157,41 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
+        //public async Task<IActionResult> Notas(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
+        //    var curso = await _context.Calificaciones
+        //        .Include(c => c.Alumno)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (curso == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(curso);
+        //}
+
+
+        public IActionResult Notas(int? id)
+        {
+
+            AlumnoVM homeVM = new AlumnoVM()
+            {
+                ListaCalificaciones = _contenedorTrabajo.Calificaciones.GetAll(),
+                alumno = new Models.Alumno(),
+                //AulaEnVM = new Aula(),
+                //CentroEduEnVM = new CentroEducativo(),
+                calificaciones = _contenedorTrabajo.Calificaciones.GetFirstOrDefault(m => m.IdAlumno==id)
+
+             };
+
+
+            return View(homeVM);
+        }
 
 
 

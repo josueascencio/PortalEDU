@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PortalEDU.Models
 {
+    [Index(nameof(IdAlumno), IsUnique = true)]
     public partial class Calificaciones
     {
         
@@ -21,6 +23,10 @@ namespace PortalEDU.Models
         public decimal? CuartoTrimestre { get; set; }
         [Column(TypeName = "decimal (18,4)")]
         public decimal? Promedio { get; set; }
+
+        [NotMapped]
+        public decimal? Prom => (PrimerTrimestre + SegundoTrimestre + TercerTrimestre + CuartoTrimestre) / 4;
+        
         public int IdAlumno { get; set; }
         [Required]
         public DateTime Update { get; set; }

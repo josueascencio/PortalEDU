@@ -1,7 +1,7 @@
 ﻿@model PortalEDU.Models.ViewModels.CalificacionesVM
 @using PortalEDU.Utilidades
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,13 +9,14 @@
 
 <br />
 <br />
-<h3 class="text-center">Registrar calificaciones</h3>
+<h3 class="text-center">Editar calificaciones</h3>
 
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
 
     <div class="row mx-5 mx-sm-5 border">
         <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="calificaciones.Id" />
         <input type="hidden" value="@DateTime.Now" asp-for="calificaciones.Update" />
         <div class="col-5 offset-4 mt-6">
             <br />
@@ -40,8 +41,8 @@
                 <div class="col-4">
                     <label asp-for="calificaciones.PrimerTrimestre"> </label>
                 </div>
-                <div class="col-3">
-                    <input asp-for="calificaciones.PrimerTrimestre" class="form-control" value="0" />
+                <div class="col-4">
+                    <input asp-for="calificaciones.PrimerTrimestre" class="form-control" />
                     <span asp-validation-for="calificaciones.PrimerTrimestre" class="text-danger"> </span>
                 </div>
             </div>
@@ -53,8 +54,8 @@
                 <div class="col-4">
                     <label asp-for="calificaciones.SegundoTrimestre"> </label>
                 </div>
-                <div class="col-3">
-                    <input asp-for="calificaciones.SegundoTrimestre" class="form-control" value="0" />
+                <div class="col-4">
+                    <input asp-for="calificaciones.SegundoTrimestre" class="form-control" />
                     <span asp-validation-for="calificaciones.SegundoTrimestre" class="text-danger"> </span>
                 </div>
             </div>
@@ -65,8 +66,8 @@
                 <div class="col-4">
                     <label asp-for="calificaciones.TercerTrimestre"> </label>
                 </div>
-                <div class="col-3">
-                    <input asp-for="calificaciones.TercerTrimestre" class="form-control" value="0" />
+                <div class="col-4">
+                    <input asp-for="calificaciones.TercerTrimestre" class="form-control" />
                     <span asp-validation-for="calificaciones.TercerTrimestre" class="text-danger"> </span>
                 </div>
             </div>
@@ -76,8 +77,8 @@
                 <div class="col-4">
                     <label asp-for="calificaciones.CuartoTrimestre"> </label>
                 </div>
-                <div class="col-3">
-                    <input asp-for="calificaciones.CuartoTrimestre" class="form-control" value="0" />
+                <div class="col-4">
+                    <input asp-for="calificaciones.CuartoTrimestre" class="form-control" />
                     <span asp-validation-for="calificaciones.CuartoTrimestre" class="text-danger"> </span>
                 </div>
             </div>
@@ -85,23 +86,28 @@
 
 
             @*<div class="form-group row">
-            <div class="col-4">
-                <label asp-for="calificaciones.Prom"> </label>
-            </div>
-            <div class="col-8">
-                <input asp-for="calificaciones.Prom" class="form-control" disabled/>
-                <span asp-validation-for="calificaciones.Prom" class="text-danger"> </span>
-            </div>
-        </div>*@
-
-
-          
-            <div class="form-group row">
-                <div class="col-12 ">
-                    <partial name="_VistaCrearVolver" />
+                <div class="col-4">
+                    <label asp-for="calificaciones.Prom"> </label>
                 </div>
+                <div class="col-8">
+                    <input asp-for="calificaciones.Prom" class="form-control" disabled/>
+                    <span asp-validation-for="calificaciones.Prom" class="text-danger"> </span>
+                </div>
+            </div>*@
 
 
+
+            <div class="form-group row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.calificaciones.Id}">Actualizar</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success form-control">Volver a la vista</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

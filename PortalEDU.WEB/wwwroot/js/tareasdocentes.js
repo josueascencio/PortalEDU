@@ -6,56 +6,71 @@ $(document).ready(function () {
 
 
 function cargarDatatable() {
-    dataTable = $("#tblAlumnos").DataTable({
+    var printCounter = 0;
+    dataTable = $("#tblTareasDocentes").DataTable({
+
+        dom: 'Bfrtip',
+        buttons: [
+            'copy',
+            {
+                extend: 'excel',
+                messageTop: 'The information in this table is copyright to Sirius Cybernetics Corp.'
+            },
+            {
+                extend: 'pdf',
+                messageBottom: null
+            },
+            {
+                extend: 'print',
+                messageTop: function () {
+                    printCounter++;
+
+                    if (printCounter === 1) {
+                        return 'This is the first time you have printed this document.';
+                    }
+                    else {
+                        return 'You have printed this document ' + printCounter + ' times';
+                    }
+                },
+                messageBottom: null
+            }
+        ],
+
+
+
+        scrollCollapse: true,
+        scrollCollapse: true,
+        autoWidth: true,
+        paging: true,
+
+
         "ajax": {
-            "url": "/admin/alumnos/GetAll",
+            "url": "/admin/TareasDocentes/GetAll",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
+            
             { "data": "id", "width": "10%" },
-            { "data": "carnet", "width": "10%" },
-            { "data": "nombre", "width": "10%" },
-            { "data": "apellido", "width": "10%" },
-            {
-                "data": "fechaNacimiento",
-                "render": function (fechaNacimiento) {
-                    return moment(fechaNacimiento).format('D/M/YYYY')
-                }
-            },
-
-            { "data": "direccion", "width": "10%" },
-            { "data": "sexo", "width": "10%" },
-            { "data": "centroEducativo.nombre", "width": "10%" },
-            { "data": "responsable.nombre", "width": "10%" },
-            {
-
-                "data": "foto",
-                "render": function (foto) {
-                    return `<img src="../${foto}" width="100">`
-                }
-            },
+            { "data": "nombre", "width": "20%" },
+            { "data": "descripcion", "width": "10%" },
+            { "data": "fechaInicio", "width": "10%" },
+            { "data": "fechaFinalizacion", "width": "10%" },
+            { "data": "documento", "width": "10%" },
+            { "data": "docente.nombre", "width": "10%" },
+            { "data": "curso.nombre", "width": "10%" },
+            { "data": "curso.aula.nombre", "width": "10%" },
 
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center card border-primary justify-content-center">
-                            <a href='/Admin/Alumnos/Edit/${data}' class='btn btn-success btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <a href='/Admin/TareasDocentes/Edit/${data}' class='btn btn-success btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-edit'></i> Editar
                             </a>
                             &nbsp;
-                            <a onclick=Delete("/Admin/Alumnos/Delete/${data}") class='btn btn-danger btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <a onclick=Delete("/Admin/TareasDocentes/Delete/${data}") class='btn btn-danger btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-trash-alt'></i> Borrar
-                            </a>
-                            &nbsp;
-                            <div class="text-center card border-primary justify-content-center">
-                            <a href='/Admin/Alumnos/Details/${data}' class='btn btn-info btn-sm text-white' style='cursor:pointer; width:70px;'>
-                            <i class='fas fa-edit'></i>Cursos
-                            </a>
-                            &nbsp;
-                            <div class="text-center card border-primary justify-content-center">
-                            <a href='/Admin/Alumnos/Notas/${data}' class='btn btn-info btn-sm text-white' style='cursor:pointer; width:70px;'>
-                            <i class='fas fa-pen'></i> Notas
                             </a>
                             `;
                 }, "width": "1%"
@@ -99,7 +114,7 @@ function cargarDatatable() {
             }
         },
         "width": "100%"
-    });
+    }).columns.adjust().draw();
 }
 
 
@@ -128,3 +143,5 @@ function Delete(url) {
         });
     });
 }
+
+

@@ -6,10 +6,10 @@ using System.Text;
 
 namespace PortalEDU.AccesoDatos.Data.Repository
 {
-    public interface ICicloRepository:IRepository<Ciclo>
+    public interface ITareaDocenteRepository:IRepository<TareaDocente>
     {
-        IEnumerable<SelectListItem> GetListaCiclo();
+        IEnumerable<SelectListItem> GetListaTareaDocente();
 
-        void Update(Ciclo ciclo);
+        void Update(TareaDocente tareaDocente);
     }
 }

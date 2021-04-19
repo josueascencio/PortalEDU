@@ -13,5 +13,10 @@ namespace PortalEDU.Models.ViewModels
 
         public IEnumerable<SelectListItem> ListaCentroEducativo { get; set; }
         public IEnumerable<SelectListItem> ListaResponsable { get; set; }
+
+
+        public Calificaciones calificaciones { get; set; }
+        public List<Calificaciones> calificacionesList { get; set; }
+        public IEnumerable<Calificaciones> ListaCalificaciones { get; set; }
     }
 }

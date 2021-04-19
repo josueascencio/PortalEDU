@@ -5,13 +5,20 @@ using System.Text;
 
 namespace PortalEDU.Models.ViewModels
 {
-    public class CalificacionesVM
+    public class TareaDocenteVM
     {
         public Alumno alumno { get; set; }
         public List<Alumno> alumnos { get; set; }
 
-        public Calificaciones calificaciones { get; set; }
-        public List<Calificaciones> calificacionesList { get; set; }
+        public TareaDocente TareaDocente { get; set; }
+        public List<TareaDocente> TareaDocenteList { get; set; }
+
+        public Docente Docente { get; set; }
+        public List<Docente> DocenteList { get; set; }
+
+        public Curso Curso { get; set; }
+        public List<Curso> CursoList { get; set; }
+
 
         public IEnumerable<Alumno> ListaAlumnos { get; set; }
         public IEnumerable<SelectListItem> ListaAlumnosItem { get; set; }
