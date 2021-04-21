@@ -11,7 +11,7 @@ namespace PortalEDU.Models
     [Index(nameof(IdAlumno), IsUnique = true)]
     public partial class Calificaciones
     {
-        
+
         public int Id { get; set; }
         [Column(TypeName = "decimal (18,4)")]
         public decimal? PrimerTrimestre { get; set; }
@@ -26,7 +26,7 @@ namespace PortalEDU.Models
 
         [NotMapped]
         public decimal? Prom => (PrimerTrimestre + SegundoTrimestre + TercerTrimestre + CuartoTrimestre) / 4;
-        
+
         public int IdAlumno { get; set; }
         [Required]
         public DateTime Update { get; set; }

@@ -1,0 +1,147 @@
+﻿@model PortalEDU.Models.ViewModels.TareaDocenteVM;
+
+<form asp-action="_TareaAlumnoPartial" method="post" enctype="multipart/form-data" id="studentForm">
+    <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+    <input type="hidden" value="@DateTime.Now" asp-for="TareaAlumnoVM.Update" />
+    
+    <a id="modal-92798" href="#modal-container-92798" role="button" class="btn btn-info" data-toggle="modal" style="width:100%">Ver instrucciones</a>
+
+    <div class="card bg-default">
+        <div class="card-header text-center">
+
+            <input asp-for="TareaAlumnoVM.IdTareaDocente" style="width:30%" placeholder="Id Tarea" />
+            <span asp-validation-for="TareaAlumnoVM.IdTareaDocente" class="text-danger"> </span>
+
+            <input asp-for="TareaAlumnoVM.IdAlumno" class="offset-1" style="width:30%" placeholder="Id Alumno" />
+            <span asp-validation-for="TareaAlumnoVM.IdAlumno" class="text-danger"> </span>
+        </div>
+
+
+        <div class="card-body">
+
+            <input id="input_doc" type="file" name="archivos" accept="application/pdf,application/vnd.ms-excel" style="width:100%" />
+            <div id="element"></div>
+            <span asp-validation-for="TareaAlumnoVM.Documento" class="text-danger"> </span>
+
+        </div>
+
+
+        <div class="card-footer">
+            Escribe un comentario
+            <textarea asp-for="TareaAlumnoVM.Comnetario" class="form-control" style="width:100%" placeholder="Comentario de tarea">
+
+            </textarea>
+            <span asp-validation-for="TareaAlumnoVM.Comnetario" class="text-danger"> </span>
+
+        </div>
+
+    </div>
+    @*<button type="button" class="btn btn-success" style="width:100%">
+            Enviar tarea
+        </button>*@
+
+    <div class="form-group row">
+        <div class="col-12">
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" id="btnSave" onclick="return validateInput()" class="btn btn-success form-control">Enviar tarea</button>
+                </div>
+                @*<div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.TareaAlumnoVM.Id">Actualizar</button>
+                        </div>
+
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+
+
+<div class="modal fade" id="modal-container-92798" role="dialog" aria-labelledby="myModalLabe" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">
+                    Instrucciones para envio de su tarea
+                </h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul>
+                                <li class="list-item">
+                                    Importante escribir su Id e Id de tarea
+                                </li>
+                                <li class="list-item">
+                                    El formato de su documento debe de ser Id_Nombre_Materia_NombreTarea
+                                </li>
+                                <li class="list-item">
+                                    Recuerde completar todos los campos
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <h6 class="text-lg-left">
+                    
+                </h6>
+
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function validateInput() {
+            if (document.getElementById("input_doc").value == "") {
+                swal("Error", "Por favor complete los campos", "error");
+                return false;
+            }
+            return true;
+        };</script>
+
+
+    <script>
+        $('#input_doc').change(function (event) {
+            var file = URL.createObjectURL(event.target.files[0]);
+            $('#element').append('<a href="' + file + '" target="_blank">' + event.target.files[0].name + '</a><br>');
+        });</script>
+
+
+
+
+}

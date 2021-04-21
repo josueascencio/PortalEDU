@@ -36,5 +36,6 @@ namespace PortalEDU.Models
         [ForeignKey("IdCurso")]
         public virtual Curso Curso { get; set; }
         public virtual ICollection<TareaAlumno> TareaAlumnos { get; set; }
+        //public virtual ICollection<AlumnoCurso> AlumnoCursos { get; set; }
     }
 }

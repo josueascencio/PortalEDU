@@ -28,16 +28,23 @@ namespace PortalEDU.WEB.Controllers
 
         public IActionResult Index()
         {
-           
+
             HomeVM homeVM = new HomeVM()
             {
+                TareaDocenteEnVM = new TareaDocente(),
                 ListaAulas = _contenedorTrabajo.Aula.GetAll(),
                 ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetAll(),
                 //AulaEnVM = new Aula(),
                 //CentroEduEnVM = new CentroEducativo(),
-                
+
                 AulaEnVM = _contenedorTrabajo.Aula.GetAll().ToList(),
-                CentroEduEnVM = _contenedorTrabajo.CentroEducativo.GetFirstOrDefault()
+                CentroEduEnVM = _contenedorTrabajo.CentroEducativo.GetFirstOrDefault(),
+
+                TareaDocenteList = _contenedorTrabajo.TareaDocente.GetAll().ToList(),
+
+                IETareaDocente = _contenedorTrabajo.TareaDocente.GetAll(),
+
+
 
 
 
@@ -48,7 +55,7 @@ namespace PortalEDU.WEB.Controllers
         }
 
 
-    
+
 
 
 

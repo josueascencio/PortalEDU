@@ -50,16 +50,21 @@ function cargarDatatable() {
             "datatype": "json"
         },
         "columns": [
-            
+
             { "data": "id", "width": "10%" },
             { "data": "nombre", "width": "20%" },
-            { "data": "descripcion", "width": "10%" },
-            { "data": "fechaInicio", "width": "10%" },
+            { "data": "comentario", "width": "10%" },
+            { "data": "fechaCreacion", "width": "10%" },
             { "data": "fechaFinalizacion", "width": "10%" },
-            { "data": "documento", "width": "10%" },
             { "data": "docente.nombre", "width": "10%" },
             { "data": "curso.nombre", "width": "10%" },
-            { "data": "curso.aula.nombre", "width": "10%" },
+
+            {
+                "data": "documento", "width": "10%",
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    $(nTd).html("<a href='https://localhost:44337" + oData.documento + "'>" + 'Descargar Archivo' + "</a>");
+                }
+            },
 
             {
                 "data": "id",

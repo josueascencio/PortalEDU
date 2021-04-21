@@ -44,56 +44,87 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            AlumnoVM alumnoVM = new AlumnoVM()
+            TareaDocenteVM tareaDocenteVM = new TareaDocenteVM()
             {
-                alumno = new Alumno(),
-                ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
-                ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable(),
+                TareaDocente = new TareaDocente(),
+                AulaVM = new Aula(),
+
+                ListaCursoItem = _contenedorTrabajo.Curso.GetListaCurso(),
+                ListaDocenteItem = _contenedorTrabajo.Docente.GetListaDocente(),
+
+                DocenteList = _contenedorTrabajo.Docente.GetAll().ToList(),
+                CursoList = _contenedorTrabajo.Curso.GetAll().ToList(),
+
+                AulaList = _contenedorTrabajo.Aula.GetAll().ToList(),
 
                 // Articulo = new Models.
 
             };
 
-            return View(alumnoVM);
+            return View(tareaDocenteVM);
 
         }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(AlumnoVM alumnoVM)
+        //public IActionResult _TareaDocentePartial(int? id)
         //{
-        //    if (ModelState.IsValid)
+
+        //    AlumnoVM homeVM = new AlumnoVM()
         //    {
-        //        string rutaPrincipal = _hostinEnvironment.WebRootPath;
-        //        var archivos = HttpContext.Request.Form.Files;
+        //        ListaCalificaciones = _contenedorTrabajo.Calificaciones.GetAll(),
+        //        alumno = new Models.Alumno(),
+        //        //AulaEnVM = new Aula(),
+        //        //CentroEduEnVM = new CentroEducativo(),
+        //        calificaciones = _contenedorTrabajo.Calificaciones.GetFirstOrDefault(m => m.IdAlumno == id)
 
-        //        if (alumnoVM.alumno.Id == 0)
-        //        {
-        //            string nombreArchivo = Guid.NewGuid().ToString();
-        //            var subidas = Path.Combine(rutaPrincipal, @"imagenes\alumnos");
-        //            var extension = Path.GetExtension(archivos[0].FileName);
-
-        //            using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo + extension), FileMode.Create))
-        //            {
-        //                archivos[0].CopyTo(fileStreams);
-        //            }
-
-        //            alumnoVM.alumno.Foto = @"\imagenes\alumnos\" + nombreArchivo + extension;
-        //            //alumnoVM.alumno.update = DateTime.Now.ToString();
-
-        //            _contenedorTrabajo.Alumno.Add(alumnoVM.alumno);
-        //            _contenedorTrabajo.Save();
+        //    };
 
 
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //    }
-
-        //    alumnoVM.ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo();
-        //    alumnoVM.ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable();
-        //    return View(alumnoVM);
+        //    return PartialView("_TareaDocentePartia",homeVM);
         //}
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(TareaDocenteVM tareaDocenteVM)
+        {
+            if (ModelState.IsValid)
+            {
+                string rutaPrincipal = _hostinEnvironment.WebRootPath;
+                var archivos = HttpContext.Request.Form.Files;
+
+                if (tareaDocenteVM.TareaDocente.Id == 0)
+                {
+                    //string nombreArchivo = Guid.NewGuid().ToString();
+                    string nombreArchivo = Path.GetFileName(archivos[0].FileName);
+                    var subidas = Path.Combine(rutaPrincipal, @"documentos\tareadocente");
+                    var extension = Path.GetExtension(archivos[0].FileName);
+
+                    using (var fileStreams = new FileStream(Path.Combine(subidas, nombreArchivo/* + extension*/), FileMode.Create))
+                    {
+                        archivos[0].CopyTo(fileStreams);
+                    }
+
+                    tareaDocenteVM.TareaDocente.Documento = @"\documentos\tareadocente\" + nombreArchivo /*+ extension*/;
+                    //alumnoVM.alumno.update = DateTime.Now.ToString();
+
+                    _contenedorTrabajo.TareaDocente.Add(tareaDocenteVM.TareaDocente);
+                    _contenedorTrabajo.Save();
+
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            tareaDocenteVM.ListaCursoItem = _contenedorTrabajo.Curso.GetListaCurso();
+            tareaDocenteVM.ListaDocenteItem = _contenedorTrabajo.Docente.GetListaDocente();
+            tareaDocenteVM.DocenteList = _contenedorTrabajo.Docente.GetAll().ToList();
+            tareaDocenteVM.CursoList = _contenedorTrabajo.Curso.GetAll().ToList();
+            tareaDocenteVM.AulaList = _contenedorTrabajo.Aula.GetAll().ToList();
+            return View(tareaDocenteVM);
+        }
 
 
 

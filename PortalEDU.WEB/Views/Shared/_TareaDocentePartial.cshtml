@@ -1,0 +1,109 @@
+﻿@model PortalEDU.Models.ViewModels.TareaDocenteVM
+
+
+@if (Model != null)
+{
+<h1><span class="badge badge-info">Lista de Tareas</span></h1>
+                <br />
+
+                                @foreach (var tarea in Model.TareaDocenteList.OrderBy(o => o.FechaCreacion))
+                                {
+                                    TimeSpan diferencia = tarea.FechaFinalizacion.Value.Date - tarea.FechaCreacion.Value.Date;
+
+                <div class="container-fluid">
+                    <div class="row border">
+                        <div class="col-md-12">
+                            @*<span class="badge badge-info">Lista de Tareas de matemáticas</span>*@
+                            <div class="row">
+                                <div class="col-md-8 my-3">
+                                    <div>
+                                        <h3 class="text-success font-weight-bold">
+                                            @tarea.Nombre
+                                        </h3>
+                                        <hr class="bg-success" />
+                                        <h5 class="text-right thead-dark">
+
+                                            Id Tarea = @tarea.Id
+
+                                        </h5>
+                                    </div>
+                                 
+
+                                    <div class="card">
+                                        
+                                        <div class="card-header ">
+                                            @tarea.Docente.Nombre - @tarea.FechaCreacion -
+                                            <label class="text-right">Puntuacion: @tarea.Puntuacion</label>
+                                        </div>
+
+                                        <div class="card-body">
+
+                                            @tarea.Comentario
+
+                                        </div>
+                                        @if (diferencia.TotalDays == 0)
+                                        {
+                                    <div class="card-footer alert-warning">
+                                        @diferencia.TotalDays dias
+                                        restantes -se agoto el tiempo-
+                                    </div> }
+                                else
+                                {
+                                    <div class="card-footer alert-success">
+                                        @diferencia.TotalDays dias
+                                        restantes
+                                    </div>}
+                                        <a id="modal-927986" href="#modal-container-927986" role="button" class="btn btn-info" data-toggle="modal">Ver instrucciones</a>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-4 my-5">
+                                    <partial name="_TareaAlumnoPartial" model="@Model" />
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="modal fade" id="modal-container-927986" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="myModalLabel">
+                                                Instrucciones y recursos para desarrollo de su tarea
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                                                                                                                 
+                                                @tarea.Descripcion
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <h6 class="text-lg-left">
+                                                <a href="@tarea.Documento" target="_blank">Descarcar recursos</a>
+                                            </h6>
+                                            
+
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                                    <br />}}
+
+

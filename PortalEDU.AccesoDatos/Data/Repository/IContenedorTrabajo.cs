@@ -15,6 +15,7 @@ namespace PortalEDU.AccesoDatos.Data.Repository
         ICursoRepository Curso { get; }
         ICalificacionesRepository Calificaciones { get; }
         ITareaDocenteRepository TareaDocente { get; }
+        ITareaAlumnoRepository TareaAlumno { get; }
 
 
 

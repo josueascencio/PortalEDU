@@ -1,10 +1,8 @@
 ﻿@model PortalEDU.Models.TareaDocente
 @*@using PortalEDU.Models*@
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 <head>
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
@@ -46,13 +44,12 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
+                <th>Comentario</th>
                 <th>Fecha de Inicio</th>
                 <th>Finaliza</th>
-                <th>Documento</th>
                 <th>Creado por</th>
-                <th>Curso</th>                
-                <th>Aula</th>
+                <th>Curso</th>
+                <th>Documento</th>
                 <th>Acciones</th>
             </tr>
         </thead>

@@ -53,6 +53,8 @@
     <Folder Include="Areas\Alumno\Controllers\" />
     <Folder Include="Areas\Docente\Controllers\" />
     <Folder Include="Areas\Padre\Controllers\" />
+    <Folder Include="wwwroot\documentos\tareadocente\" />
+    <Folder Include="wwwroot\documentos\tareaalumno\" />
     <Folder Include="wwwroot\imagenes\alumnos\" />
     <Folder Include="wwwroot\imagenes\docentes\" />
   </ItemGroup>

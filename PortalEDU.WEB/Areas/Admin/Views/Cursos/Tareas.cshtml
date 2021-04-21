@@ -1,0 +1,23 @@
+﻿@model PortalEDU.Models.ViewModels.TareaDocenteVM
+@{
+    ViewData["Title"] = "Tareas";
+}
+
+<br />
+
+@if (Model.TareaDocenteList.Count() > 0)
+{
+
+    <partial name="_TareaDocentePartial" model="@Model" />
+
+}
+
+else { 
+<h4 class="text-center"> No hay tareas para este curso</h4>
+<div class="col">
+    <a asp-action="Index" class="btn btn-success form-control">Volver a la vista</a>
+</div>
+}
+
+
+
