@@ -77,6 +77,10 @@ function cargarDatatable() {
                             <a onclick=Delete("/Admin/TareasDocentes/Delete/${data}") class='btn btn-danger btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-trash-alt'></i> Borrar
                             </a>
+                            &nbsp;
+                            <a href='/Admin/TareasDocentes/_ListaTareasAlumno/${data}' class='btn btn-success btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <i class='fas fa-edit'></i> Tareas
+                            </a>
                             `;
                 }, "width": "1%"
             }

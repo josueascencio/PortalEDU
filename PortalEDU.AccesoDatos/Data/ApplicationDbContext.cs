@@ -45,6 +45,8 @@ namespace PortalEDU.AccesoDatos.Data
         public DbSet<TareaAlumno> TareaAlumno { get; set; }
         public DbSet<TareaDocente> TareaDocente { get; set; }
         public DbSet<Sala> Sala { get; set; }
+        public DbSet<SalaComentario> SalaComentario { get; set; }
+
         //public DbSet<UsuarioSesion> UsuarioSesion { get; set; }
 
 

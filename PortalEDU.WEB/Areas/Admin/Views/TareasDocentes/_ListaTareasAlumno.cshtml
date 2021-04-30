@@ -1,0 +1,22 @@
+﻿@model PortalEDU.Models.ViewModels.TareaDocenteVM
+@{
+    ViewData["Title"] = "_ListaTareasAlumno";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>_ListaTareasAlumno</h1>
+
+@foreach (var item in Model.ListaTareaAlumno)
+{
+<ul>
+    <li>
+        <a href="@item.Documento" target="_blank">Descargar tarea @*@item.Alumno.Nombre*@</a>
+    </li>
+    <li>
+        @item.Alumno.Nombre
+    </li>
+</ul>
+    
+    
+    
+}

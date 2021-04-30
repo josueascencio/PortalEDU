@@ -1,0 +1,194 @@
+﻿@model PortalEDU.Models.ViewModels.SalaVM
+@{
+    ViewData["Title"] = "Details";
+}
+
+@*@{ ViewData["Title"] = @Model.SalaEnVM.Titulo; }*@
+<head>
+    <style>
+        /*Flecha para hacer la pagina hacia arriba*/
+        .ir-arriba {
+            display: none;
+            background-repeat: no-repeat;
+            font-size: 20px;
+            color: black;
+            cursor: pointer;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<!-- Boton hacia arriba -->
+<a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+</a>
+
+
+<section class="d-flex flex-wrap justify-content-start align-items-center">
+    <h1 class="font-weight-bold">@Model.SalaEnVM.Titulo</h1>
+    @*@if (User.IsInRole(WebConstants.BloggerRole)
+         && User.Identity.Name == Model.AuthorUsername)
+        {*@
+    <div class="d-flex justify-content-between">
+        <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Edit" class="btn btn-outline-warning mx-1"><i class="fa fa-pen"></i></a>
+        <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+    </div>
+</section>
+
+<h6 class="text-muted mx-4">
+    @Model.SalaEnVM.FechaPublicacion.ToLocalTime() |
+    @*<a asp-area=""
+        asp-controller="@WebConstants.TrainersController"
+        asp-action="@nameof(TrainersController.Details)"
+        asp-route-id="@Model.AuthorUsername">@Model.AuthorName</a> |*@
+    <span>
+        ID reunión= @Model.SalaEnVM.Id
+    </span>
+</h6>
+
+@* NB. Content is already sanitized in db *@
+
+
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" />
+<div class="container">
+    <div class="well border-info">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="~/imagenes/recursos/klipartz.png">
+            </a>
+
+            <div class="media-body">
+                <h4 class="media-heading">@Model.SalaEnVM.Titulo</h4>
+                <p class="text-right">Realizado por: @Model.SalaEnVM.Responsable.Nombre</p>
+                <p>
+
+                    <article class="text-justify font-weight-bold">"@Html.Raw(Model.SalaEnVM.Contenido)"</article>
+                </p>
+
+                <hr class="border-danger" />
+                <ul class="list-inline list-unstyled">
+                    @{var diferencia = DateTime.Now.Date.Day - Model.SalaEnVM.FechaPublicacion.Date.Day;}
+
+                    <li><span><i class="glyphicon glyphicon-calendar"></i> @diferencia dias</span></li>
+                    <li>|</li>
+                    <span><i class="glyphicon glyphicon-comment"></i> @Model.ListSalaComentario.Count(x => x.IdSala == Model.SalaEnVM.Id)</span>
+                    <li>|</li>
+                    <li>
+                        <!-- Use Font Awesome http://fortawesome.github.io/Font-Awesome/ -->
+                        <span><i class="fa fa-envelope"></i> <a href="mailto:portaleducativo@gmail.com">Correo Portal Educativo</a></span>
+
+                    </li>
+                    <li>|</li>
+                    <li><span><i class="fas fa-user"></i> @Model.SalaEnVM.Docente.Nombre</span></li>
+                </ul>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<input type="hidden" asp-for="SalaEnVM.Id" />
+<input type="hidden" asp-for="SalaEnVM.Titulo" />
+<input type="hidden" asp-for="SalaEnVM.Autor" />
+<input type="hidden" asp-for="SalaEnVM.Contenido" />
+<input type="hidden" asp-for="SalaEnVM.FechaPublicacion" />
+<input type="hidden" asp-for="ListSalaComentario" />
+<input type="hidden" asp-for="SalaEnVM.Docente.Nombre" />
+@foreach (var item in Model.ListSalaComentario)
+{
+    if (item.Id != 0)
+    {
+
+
+        <div class="container my-sm-n4">
+            <div class="well">
+                <div class="media">
+
+
+                    <div class="media-body">
+                        <form asp-action="DeleteSalaComentario" class="text-right">
+                            @*<input type="hidden" asp-for="@item.Id" />*@
+                            <button type="submit" asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.DeleteSalaComentario)" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+
+
+
+                        </form>
+
+                        <h6 class="media-heading font-weight-bolder">@item.FechaPublicacion</h6>
+                        <p class="text-right font-weight-bolder" style="font-size:small">Realizado por: @item.Nombre </p>                     
+                        <p>
+                            <article class="text-justify">"@item.Contenido"</article>
+                        </p>
+
+                        <hr class="border-success" />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div>
+            <h4> Este caso aun no tiene comentarios</h4>
+        </div>
+    }
+
+
+}
+<br />
+<br />
+<div class="container">
+
+    <partial name="_SalaComentario.cshtml" model=@Model />
+
+</div>
+<br />
+<br />
+<div>
+    <a class="btn btn-info mx-4" asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)"><i class="fas fa-undo"></i> Regreesar a la lista de reuniones</a>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<script>
+    // Funcion de boton "Ir arriba"
+    $(document).ready(function () { //Hacia arriba
+        irArriba();
+    });
+
+    function irArriba() {
+        $('.ir-arriba').click(function () { $('body,html').animate({ scrollTop: '0px' }, 1000); });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 0) { $('.ir-arriba').slideDown(600); } else { $('.ir-arriba').slideUp(600); }
+        });
+        $('.ir-abajo').click(function () { $('body,html').animate({ scrollTop: '1000px' }, 1000); });
+    }
+</script>

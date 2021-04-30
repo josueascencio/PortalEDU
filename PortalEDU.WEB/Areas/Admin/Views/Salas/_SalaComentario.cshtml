@@ -1,0 +1,74 @@
+﻿@model PortalEDU.Models.ViewModels.SalaVM
+
+<form asp-action="_SalaComentario" method="post" enctype="multipart/form-data" id="studentForm" name="formulario" onSubmit="return limpiar()">
+    <div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+    <input type="hidden" value="@DateTime.Now" asp-for="SalaComentarioEnVM.FechaPublicacion" />
+
+
+    <div class="card bg-default">
+
+
+        <div class="card-body">
+            <label class="control-label">Escriba su nombre</label>
+            <input asp-for="@Model.SalaComentarioEnVM.Nombre" class="form-control" placeholder="Nombre para mostrar..." style="width:40%" />
+
+            <span asp-validation-for="@Model.SalaComentarioEnVM.Nombre" class="text-danger"> </span>
+
+        </div>
+
+        <div class="card-body">
+            <label class="control-label">Escriba su comentario</label>
+            <textarea asp-for="@Model.SalaComentarioEnVM.Contenido" class="form-control" placeholder="Escriba un comentario..."></textarea>
+            <span asp-validation-for="@Model.SalaComentarioEnVM.Contenido" class="text-danger"> </span>
+
+        </div>
+
+   
+        <input type="hidden" asp-for="SalaEnVM.Id" />
+        <input type="hidden" asp-for="SalaEnVM.Titulo" />
+        <input type="hidden" asp-for="SalaEnVM.Autor" />
+        <input type="hidden" asp-for="SalaEnVM.Contenido" />
+        <input type="hidden" asp-for="SalaEnVM.FechaPublicacion" />
+        <input type="hidden" asp-for="ListSalaComentario" />
+        <input type="hidden" asp-for="SalaEnVM.Docente.Nombre" />
+        <input type="hidden" asp-for="SalaEnVM.Responsable.Nombre" />
+
+        <div class="form-group row">
+            <div class="col-3 mx-3">
+
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success form-control">Enviar comentarios</button>
+                    </div>
+                    @*<div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.TareaAlumnoVM.Id">Actualizar</button>
+                        </div>
+
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<div asp-validation-summary=" ModelOnly" class="text-danger"></div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+
+
+    <script>function limpiar() {
+            setTimeout('document.formulario.reset()', 2000);
+            return false;
+        }</script>
+
+
+}

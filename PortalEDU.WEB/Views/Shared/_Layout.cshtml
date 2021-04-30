@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using SyncPortalAPI
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -35,15 +37,19 @@
                             @*<span class="sr-only">(current)</span>*@
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="CentrosEducativos" asp-action="Index">Centro Educativo</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Configuracion</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="Ciclos" asp-action="Index">Ciclo Academico</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="CentrosEducativos" asp-action="Index">Centro Educativo</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="Aulas" asp-action="Index">Aula</a>
+                            @*<div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Separated link</a>*@
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Ciclos" asp-action="Index">Ciclo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Aulas" asp-action="Index">Aula</a>
-                    </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Cursos" asp-action="Index">Cursos</a>
                     </li>
@@ -51,7 +57,10 @@
                         <a class="nav-link" asp-area="Admin" asp-controller="Calificaciones" asp-action="Index">Calificaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="TareasDocentes" asp-action="Index">Tareas</a>
+                        <a class="nav-link" asp-area="Admin" asp-controller="TareasDocentes" asp-action="Index">Crear tarea</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Salas" asp-action="Index">Sala de reunion</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion de Usuarios</a>
@@ -62,6 +71,9 @@
                             @*<div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>*@
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-info" href="https://localhost:44383/api/sync" target="_self">API</a>
                     </li>
                 </ul>
 

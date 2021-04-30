@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace PortalEDU.Models
@@ -16,10 +17,19 @@ namespace PortalEDU.Models
 
         public DateTime FechaPublicacion { get; set; }
 
-        //public string IdAutor { get; set; }
+        public string Autor { get; set; }
 
-        //public User Author { get; set; }
+        public int? IdDocente { get; set; }
 
+        public int? IdResponsable { get; set; }
+
+        public ICollection<SalaComentario> SalaComentarios { get; set; }
         
+        [ForeignKey("IdDocente")]
+        public Docente Docente { get; set; }
+
+        [ForeignKey("IdResponsable")]
+        public Responsable Responsable { get; set; }
+
     }
 }

@@ -56,6 +56,11 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             };
 
+            if (TempData["tareaerror"] != null)
+                ViewBag.errortarea = TempData["tareaerror"].ToString();
+
+            if (TempData["tareaexito"] != null)
+                ViewBag.tareaexito = TempData["tareaexito"].ToString();
 
             return View(cursoCardVM);
         }
@@ -313,7 +318,9 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                                 {
                                 if (archivos.Count() <= 0)
                                 {
-                                    ViewBag.errortarea = "Hubo un error al enviar su tare intente nuevamente";
+                                    //ViewBag.errortarea = "Hubo un error al enviar su tare intente nuevamente";
+                                    TempData["tareaerror"] = "Hubo un error al enviar su tarea intente nuevamente";
+
                                     return RedirectToAction("index", "cursos");
                                 }
                                     //string nombreArchivo = Guid.NewGuid().ToString();
@@ -332,9 +339,16 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                                     _contenedorTrabajo.TareaAlumno.Add(tareaDocenteVM.TareaAlumnoVM);
                                     _contenedorTrabajo.Save();
 
-                                    return PartialView("_TareaDocentePartial");
+                                TempData["tareaexito"] = "Felicidades su tarea ha sido enviada exitosamente";
+
+                                return RedirectToAction("index", "cursos");
+
+                               
 
                                 
+
+
+
                               
                             }
                            
@@ -374,8 +388,9 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                                     _contenedorTrabajo.TareaAlumno.Update(tareaDocenteVM.TareaAlumnoVM);
                                     _contenedorTrabajo.Save();
 
+                                    TempData["tareaexito"] = "Felicidades su tarea ha sido enviada exitosamente";
 
-                                    return PartialView("Tareas", tareaDocenteVM);
+                                    return RedirectToAction("index", "cursos");
                                 }
                                 catch (DbUpdateException)
                                 {
@@ -396,7 +411,9 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
                             _contenedorTrabajo.TareaAlumno.Update(tareaDocenteVM.TareaAlumnoVM);
                             _contenedorTrabajo.Save();
-                            return PartialView("Tareas", tareaDocenteVM);
+                            TempData["tareaexito"] = "Felicidades su tarea ha sido enviada exitosamente";
+
+                            return RedirectToAction("index", "cursos");
                         }
 
 

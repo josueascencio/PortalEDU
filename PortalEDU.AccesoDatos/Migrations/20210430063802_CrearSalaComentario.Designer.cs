@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalEDU.AccesoDatos.Data;
 
 namespace PortalEDU.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210430063802_CrearSalaComentario")]
+    partial class CrearSalaComentario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -573,29 +575,16 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Autor")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Contenido")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaPublicacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IdDocente")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdResponsable")
-                        .HasColumnType("int");
-
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdDocente");
-
-                    b.HasIndex("IdResponsable");
 
                     b.ToTable("Sala");
                 });
@@ -613,15 +602,10 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<DateTime>("FechaPublicacion")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdSala")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdSala");
 
                     b.ToTable("SalaComentario");
                 });
@@ -869,32 +853,6 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Navigation("IdDocenteNavigation");
                 });
 
-            modelBuilder.Entity("PortalEDU.Models.Sala", b =>
-                {
-                    b.HasOne("PortalEDU.Models.Docente", "Docente")
-                        .WithMany()
-                        .HasForeignKey("IdDocente");
-
-                    b.HasOne("PortalEDU.Models.Responsable", "Responsable")
-                        .WithMany()
-                        .HasForeignKey("IdResponsable");
-
-                    b.Navigation("Docente");
-
-                    b.Navigation("Responsable");
-                });
-
-            modelBuilder.Entity("PortalEDU.Models.SalaComentario", b =>
-                {
-                    b.HasOne("PortalEDU.Models.Sala", "Sala")
-                        .WithMany("SalaComentarios")
-                        .HasForeignKey("IdSala")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Sala");
-                });
-
             modelBuilder.Entity("PortalEDU.Models.TareaAlumno", b =>
                 {
                     b.HasOne("PortalEDU.Models.Alumno", "Alumno")
@@ -953,11 +911,6 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("PortalEDU.Models.Responsable", b =>
                 {
                     b.Navigation("AlumnoLista");
-                });
-
-            modelBuilder.Entity("PortalEDU.Models.Sala", b =>
-                {
-                    b.Navigation("SalaComentarios");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.TareaDocente", b =>

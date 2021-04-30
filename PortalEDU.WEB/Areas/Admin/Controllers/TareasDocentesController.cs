@@ -41,7 +41,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
         [HttpGet]
-
         public IActionResult Create()
         {
             TareaDocenteVM tareaDocenteVM = new TareaDocenteVM()
@@ -125,6 +124,12 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
             tareaDocenteVM.AulaList = _contenedorTrabajo.Aula.GetAll().ToList();
             return View(tareaDocenteVM);
         }
+
+
+
+
+
+
 
 
 
@@ -335,6 +340,32 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
+        [HttpGet]
+        public IActionResult _ListaTareasAlumno(int id)
+        {
+            TareaDocenteVM tareaDocenteVM = new TareaDocenteVM()
+            {
+                TareaDocente = new TareaDocente(),
+                AulaVM = new Aula(),
+
+                ListaCursoItem = _contenedorTrabajo.Curso.GetListaCurso(),
+                ListaDocenteItem = _contenedorTrabajo.Docente.GetListaDocente(),
+
+                DocenteList = _contenedorTrabajo.Docente.GetAll().ToList(),
+                CursoList = _contenedorTrabajo.Curso.GetAll().ToList(),
+
+                AulaList = _contenedorTrabajo.Aula.GetAll().ToList(),
+
+                // Articulo = new Models.
+
+            };
+
+            tareaDocenteVM.ListaTareaAlumno = _contenedorTrabajo.TareaAlumno.GetAll().Where(X=> X.IdTareaDocente == id);
+            tareaDocenteVM.ListaAlumnos = _contenedorTrabajo.Alumno.GetAll();
+
+            return View(tareaDocenteVM);
+
+        }
 
 
 

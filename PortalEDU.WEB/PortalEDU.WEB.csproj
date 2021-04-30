@@ -79,6 +79,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PortalEDU.AccesoDatos\PortalEDU.AccesoDatos.csproj" />
+    <ProjectReference Include="..\SyncPortalAPI\SyncPortalAPI.csproj" />
   </ItemGroup>
 
 </Project>
