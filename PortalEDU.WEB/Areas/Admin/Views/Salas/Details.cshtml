@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Details";
 }
-
 @*@{ ViewData["Title"] = @Model.SalaEnVM.Titulo; }*@
 <head>
     <style>
@@ -35,10 +34,10 @@
     @*@if (User.IsInRole(WebConstants.BloggerRole)
          && User.Identity.Name == Model.AuthorUsername)
         {*@
-    <div class="d-flex justify-content-between">
-        <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Edit" class="btn btn-outline-warning mx-1"><i class="fa fa-pen"></i></a>
-        <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
-    </div>
+    @*<div class="d-flex justify-content-between">
+            <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Edit" class="btn btn-outline-warning mx-1"><i class="fa fa-pen"></i></a>
+            <a asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.Index)" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+        </div>*@
 </section>
 
 <h6 class="text-muted mx-4">
@@ -78,9 +77,26 @@
 
                 <hr class="border-danger" />
                 <ul class="list-inline list-unstyled">
-                    @{var diferencia = DateTime.Now.Date.Day - Model.SalaEnVM.FechaPublicacion.Date.Day;}
+                    @{int diferencia = DateTime.Now.Date.Day - Model.SalaEnVM.FechaPublicacion.Date.Day;}
 
-                    <li><span><i class="glyphicon glyphicon-calendar"></i> @diferencia dias</span></li>
+
+                    @if (diferencia == 0)
+                    {
+                        TimeSpan diferencia1 = ((DateTime.Now.Date - Model.SalaEnVM.FechaPublicacion.Date));
+                        <li><span><i class="glyphicon glyphicon-calendar"></i> Hace minutos </span></li>
+                    }
+                    else if (diferencia < 0)
+                    {
+                        TimeSpan diferencia2 = ((DateTime.Now.Date - Model.SalaEnVM.FechaPublicacion.Date));
+                        <li><span><i class="glyphicon glyphicon-calendar"></i> @diferencia2.Days dias</span></li>
+                    }
+
+                    else
+                    {
+                        int diferencia3 = (DateTime.Now.Date.Day - Model.SalaEnVM.FechaPublicacion.Date.Day);
+                        <li><span><i class="glyphicon glyphicon-calendar"></i> @diferencia3 dias</span></li>
+                    }
+
                     <li>|</li>
                     <span><i class="glyphicon glyphicon-comment"></i> @Model.ListSalaComentario.Count(x => x.IdSala == Model.SalaEnVM.Id)</span>
                     <li>|</li>
@@ -125,16 +141,23 @@
 
 
                     <div class="media-body">
-                        <form asp-action="DeleteSalaComentario" class="text-right">
-                            @*<input type="hidden" asp-for="@item.Id" />*@
-                            <button type="submit" asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.DeleteSalaComentario)" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                        <!--<form asp-action="DeleteSalaComentario" class="text-right">-->
+                        @*<input type="hidden" asp-for="@item.Id" />*@
+                        <!--<button type="submit" asp-action="@nameof(PortalEDU.WEB.Areas.Admin.Controllers.SalasController.DeleteSalaComentario)" asp-route-id="@item.Id" data-toggle="tooltip" title="Delete" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
 
 
 
-                        </form>
+                        </form>-->
+                        <div class="text-right my-sm-n1">
+                            <a onclick=Delete("/Admin/Salas/Delete/@item.Id") data-toggle="tooltip" title="Borrar" class="btn btn-outline-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>
 
-                        <h6 class="media-heading font-weight-bolder">@item.FechaPublicacion</h6>
-                        <p class="text-right font-weight-bolder" style="font-size:small">Realizado por: @item.Nombre </p>                     
+
+                        <h6 class="media-heading font-weight-bolder my-sm-n2">@item.FechaPublicacion</h6>
+
+                        <p class="text-right font-weight-bolder" style="font-size:small">Realizado por: @item.Nombre </p>
                         <p>
                             <article class="text-justify">"@item.Contenido"</article>
                         </p>
@@ -192,3 +215,41 @@
         $('.ir-abajo').click(function () { $('body,html').animate({ scrollTop: '1000px' }, 1000); });
     }
 </script>
+
+
+
+<script>
+    function Delete(url) {
+        swal({
+            title: "¿Esta seguro de borrar?",
+            text: "¡Este contenido no se puede recuperar!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si, borrar",
+            closeOnconfirm: true
+        }, function () {
+            $.ajax({
+                type: 'DELETE',
+                @*url: '@Url.Action("Admin/Salas/DeleteSalaComentario")',*@
+                url:url,
+                //success: function (data) {
+                @*data: { id: @Model.SalaComentarioEnVM.Id},*@
+                success: function (result) {
+
+                    if (result.success) {
+                        //toastr.success(result.message);
+                        //dataTable.ajax.reload();
+                        location.reload();
+                    }
+                    else {
+                        toastr.error(result.message);
+                    }
+                }
+            });
+        });
+    }
+
+
+</script>
+

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortalEDU.AccesoDatos.Data;
 using PortalEDU.AccesoDatos.Data.Repository;
+using PortalEDU.Models;
 using PortalEDU.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -153,8 +154,8 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 _contenedorTrabajo.Save();
                 salaVM.ListSalaComentario = _context.SalaComentario.ToList();
                 salaVM.SalaEnVM = salaVM.SalaEnVM;
-                salaVM.SalaComentarioEnVM = null;
-                return View("Details", salaVM);
+               
+                return View("Details",salaVM);
             }
             //centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
             return RedirectToAction(nameof(Index));
@@ -174,10 +175,18 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 SalaVM salaVM = new SalaVM()
                 {
                     ListSala = _context.Sala.ToList(),
-                    SalaEnVM = new Models.Sala(),
+                    
+                    ListSalaComentario = _context.SalaComentario.ToList(),
+                    ListaResponsable = _context.Responsable.ToList(),
+                    ListaDocente = _context.Docente.ToList(),
+
+                    IESala = _context.Sala.ToList(),
+                    IESalaComentario = _context.SalaComentario.ToList()
+
                 };
 
-                return RedirectToAction("Details", salaVM);
+                return Json(new { success = true, message = "Centro Educativo borrado con exito" });
+
 
             }
             catch (DbUpdateException)
@@ -189,5 +198,25 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+
+
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var objFromDb = _context.SalaComentario.Find(id);
+            if (objFromDb == null)
+            {
+                return Json(new { success = false, message = "Error borrando Centro Educativo" });
+            }
+
+            _context.SalaComentario.Remove(objFromDb);
+            _context.SaveChanges();
+            return Json(new { success = true, message = "Centro Educativo borrado con exito" });
+        }
+
+
+
     }
 }

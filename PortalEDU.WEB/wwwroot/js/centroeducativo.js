@@ -15,7 +15,7 @@ function cargarDatatable() {
             'copy',
             {
                 extend: 'excel',
-                messageTop: 'The information in this table is copyright to Sirius Cybernetics Corp.'
+                messageTop: 'Información extraida de Portal Educativo - 2021.'
             },
             {
                 extend: 'pdf',
@@ -27,23 +27,21 @@ function cargarDatatable() {
                     printCounter++;
 
                     if (printCounter === 1) {
-                        return 'This is the first time you have printed this document.';
+                        return 'Esta es la primera vez que se genera este reporte.';
                     }
                     else {
-                        return 'You have printed this document ' + printCounter + ' times';
+                        return 'Este reporte se ha generado' + printCounter + ' veces';
                     }
                 },
                 messageBottom: null
             }
         ],
 
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true,
 
-
-
-        scrollCollapse: true,
-        scrollCollapse: true,
-        autoWidth: true,
-        paging: true,
         "ajax": {
             "url": "/admin/centroseducativos/GetAll",
             "type": "GET",
@@ -58,7 +56,7 @@ function cargarDatatable() {
             { "data": "tipo", "width": "10%" },
             { "data": "director", "width": "10%" },
             { "data": "ciclo.anioAcademico", "width": "10%" },
-            
+
             {
                 "data": "id",
                 "render": function (data) {
@@ -112,7 +110,7 @@ function cargarDatatable() {
             }
         },
         "width": "100%"
-    }).columns.adjust().draw();
+    });
 }
 
 

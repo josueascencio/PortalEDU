@@ -30,6 +30,7 @@ namespace PortalEDU.Models
         public DateTime? FechaFinal { get; set; }
         //public string Aviso { get; set; }
         //public string Imagen { get; set; }
+        [Display(Name = "Activar / Desactivar")]
         public bool Estado { get; set; }
         public int IdAula { get; set; }
         [Required]

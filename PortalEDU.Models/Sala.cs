@@ -10,7 +10,7 @@ namespace PortalEDU.Models
     {
         [Key]
         public int Id { get; set; }
-        
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Titulo { get; set; }
 
         public string Contenido { get; set; }

@@ -19,7 +19,7 @@ namespace SyncPortalClient
     class Program
     {
 
-        private static string clientConnectionString = $"Data Source=LA-SV-VT-01-136; Initial Catalog=ClientePortalSync; user id=sa; pwd=Ef1c13nc1@; Trusted_Connection=false; MultipleActiveResultSets=true;";
+        private static string clientConnectionString = $"Data Source=LA-SV-VT-01-136; Initial Catalog=CE1PortalEDU5; user id=sa; pwd=Ef1c13nc1@; Trusted_Connection=false; MultipleActiveResultSets=true;";
 
         static async Task Main(string[] args)
         {

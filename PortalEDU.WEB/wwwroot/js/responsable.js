@@ -98,6 +98,10 @@ function cargarDatatable() {
                             <a onclick=Delete("/Admin/Responsables/Delete/${data}") class='btn btn-danger btn-sm text-white' style='cursor:pointer; width:70px;'>
                             <i class='fas fa-trash-alt'></i> Borrar
                             </a>
+                            &nbsp;
+                            <a href='/Admin/Salas' class='btn btn-info btn-sm text-white' style='cursor:pointer; width:70px;'>
+                            <i class='fas fa-pen-alt'></i> Foros
+                            </a>
                             `;
                 }, "width": "1%"
             }

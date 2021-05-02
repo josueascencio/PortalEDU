@@ -283,7 +283,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
                 AulaList = _contenedorTrabajo.Aula.GetAll().ToList(),
 
-                TareaDocente = _contenedorTrabajo.TareaDocente.GetFirstOrDefault(m => m.IdCurso == id)
+                //TareaDocente = _contenedorTrabajo.TareaDocente.GetFirstOrDefault(m => m.IdCurso == id)
 
             };
 

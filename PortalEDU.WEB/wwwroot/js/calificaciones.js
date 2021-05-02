@@ -9,6 +9,11 @@ function cargarDatatable() {
     var printCounter = 0;
     dataTable = $("#tblCalificaciones").DataTable({
 
+        rowReorder: {
+            selector: 'td:nth-child(4)'
+        },
+        responsive: true,
+
         dom: 'Bfrtip',
         buttons: [
             'copy',
@@ -35,13 +40,6 @@ function cargarDatatable() {
                 messageBottom: null
             }
         ],
-
-
-
-        scrollCollapse: true,
-        scrollCollapse: true,
-        autoWidth: true,
-        paging: true,
 
 
         "ajax": {
@@ -113,7 +111,7 @@ function cargarDatatable() {
             }
         },
         "width": "100%"
-    }).columns.adjust().draw();
+    });
 }
 
 

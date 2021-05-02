@@ -7,11 +7,12 @@ $(document).ready(function () {
 
 function cargarDatatable() {
     dataTable = $("#tblCiclos").DataTable({
-        iDisplayLength: 25,
-        bDestroy: true,
-        bJQueryUI: true,
-
-        bAutoWidth: true,
+      
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true,
+       
                  
         "ajax": {
            
@@ -21,8 +22,8 @@ function cargarDatatable() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "id", "width": "30" },
-            { "data": "anioAcademico", "width": "30" },
+            { "data": "id", "width": "50" },
+            { "data": "anioAcademico", "width": "50" },
      
             {
                 "data": "id",
@@ -79,7 +80,7 @@ function cargarDatatable() {
        
         },
         "width": "100%"
-    })
+    });
 }
 
 

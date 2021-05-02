@@ -1,17 +1,51 @@
-﻿<section class="jumbotron text-center bg-transparent shadow ">
-    <h1>Bienvenidos a su Portal Educativo</h1>
+﻿
+
+<head>
+    <style>
+        /*Flecha para hacer la pagina hacia arriba*/
+        .ir-arriba {
+            display: none;
+            background-repeat: no-repeat;
+            font-size: 20px;
+            color: black;
+            cursor: pointer;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+
+<!-- Boton hacia arriba -->
+<a class="ir-arriba" javascript:void(0) title="Volver arriba">
+    <span class="fa-stack">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-arrow-up fa-stack-1x fa-inverse"></i>
+    </span>
+</a>
+
+
+
+<section class="jumbotron text-center bg-transparent shadow ">
+    <h1 class="font-weight-bold">Bienvenidos a su Portal Educativo</h1>
 
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
+
             <div class="carousel-item active">
-                <img class="d-block w-100" src="~/imagenes/home/colegio.jpg"  alt="First slide">
+                <img class="d-block w-100" src="~/imagenes/home/colegio.jpg" alt="First slide">
+                <p class="small text-lg-left">Foto de Julia M Cameron en Pexels <p>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Second slide">
+                <img class="d-block w-100" src="~/imagenes/home/pexels-august-de-richelieu-4261266.jpg" alt="Second slide">
+                <p class="small text-lg-left">Foto de Julia M Cameron en Pexels </p>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="..." alt="Third slide">
+                <img class="d-block w-100" src="~/imagenes/home/pexels-julia-m-cameron-4144294.jpg" alt="Third slide">
+                <p class="small text-lg-left">Foto de August de Richelieu en Pexels</p>
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -22,22 +56,38 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+        <p class="lead my-lg-n2">
+            <h3 class="font-weight-bold">Noticias oficiales del Ministerio de Educacion de El Salvador</h3>
+            <a href="https://www.mined.gob.sv/noticias.html" target="_blank"> <h4 class="font-italic"><i class="far fa-hand-point-right"> Aqui</i></h4> </a>
+        </p>
+
     </div>
 
-
-
-    <p class="lead">
-        Explorar información
-    </p>
+ 
     <hr class="my-4">
     <p class="lead">
         <a class="btn btn-outline-info btn-lg"
            asp-area="Admin"
-           asp-controller="Aulas"
-           asp-action="@nameof(Index)" role="button">Salones</a>
+           asp-controller="Cursos"
+           asp-action="@nameof(Index)" role="button">Cursos</a>
         <a class="btn btn-outline-success btn-lg"
            asp-area="Admin"
-           asp-controller="Responsables"
-           asp-action="@nameof(Index)" role="button">Blog <i class="fa fa-feather-alt"></i></a>
+           asp-controller="Salas"
+           asp-action="@nameof(Index)" role="button">Foro <i class="fa fa-pen-alt"></i></a>
     </p>
 </section>
+
+
+
+<script>// Funcion de boton "Ir arriba"
+    $(document).ready(function () { //Hacia arriba
+        irArriba();
+    });
+
+    function irArriba() {
+        $('.ir-arriba').click(function () { $('body,html').animate({ scrollTop: '0px' }, 1000); });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 0) { $('.ir-arriba').slideDown(600); } else { $('.ir-arriba').slideUp(600); }
+        });
+        $('.ir-abajo').click(function () { $('body,html').animate({ scrollTop: '1000px' }, 1000); });
+    }</script>

@@ -6,11 +6,11 @@
 <h1><span class="badge badge-info">Lista de Tareas</span></h1>
                 <br />
 
-                                @foreach (var tarea in Model.TareaDocenteList.OrderBy(o => o.FechaCreacion))
-                                {
-                                    TimeSpan diferencia = tarea.FechaFinalizacion.Value.Date - tarea.FechaCreacion.Value.Date;
+@foreach (var tarea in Model.TareaDocenteList.OrderBy(o => o.FechaCreacion))
+   {
+     TimeSpan diferencia = tarea.FechaFinalizacion.Value.Date - tarea.FechaCreacion.Value.Date;
 
-                <div class="container-fluid">
+     <div class="container-fluid">
                     <div class="row border">
                         <div class="col-md-12">
                             @*<span class="badge badge-info">Lista de Tareas de matemáticas</span>*@
@@ -27,10 +27,10 @@
 
                                         </h5>
                                     </div>
-                                 
+
 
                                     <div class="card">
-                                        
+
                                         <div class="card-header ">
                                             @tarea.Docente.Nombre - @tarea.FechaCreacion -
                                             <label class="text-right">Puntuacion: @tarea.Puntuacion</label>
@@ -43,17 +43,16 @@
                                         </div>
                                         @if (diferencia.TotalDays == 0)
                                         {
-                                    <div class="card-footer alert-warning">
-                                        @diferencia.TotalDays dias
-                                        restantes -se agoto el tiempo-
-                                    </div> }
-                                else
-                                {
-                                    <div class="card-footer alert-success">
-                                        @diferencia.TotalDays dias
-                                        restantes
-                                    </div>}
-                                        <a id="modal-927986" href="#modal-container-927986" role="button" class="btn btn-info" data-toggle="modal">Instrucciones y recursos</a>
+                    <div class="card-footer alert-warning">
+                        @diferencia.TotalDays dias
+                        restantes -se agoto el tiempo-
+                    </div> }
+                else
+                {
+<div class="card-footer alert-success">
+    @diferencia.TotalDays dias restantes
+</div>}
+                                        <a id="modal-927986" href="#modal-container-927986" data-target="#tips-@tarea.Id" role="button" class="btn btn-info" data-toggle="modal">Instrucciones y recursos</a>
                                     </div>
                                 </div>
 
@@ -64,10 +63,7 @@
                                 </div>
                             </div>
 
-
-
-
-                            <div class="modal fade" id="modal-container-927986" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="tips-@tarea.Id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -79,16 +75,16 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            
-                                                                                                                                 
-                                                @tarea.Descripcion
+
+
+                                            @tarea.Descripcion
 
                                         </div>
                                         <div class="modal-footer">
                                             <h6 class="text-lg-left">
                                                 <a href="@tarea.Documento" target="_blank">Descarcar recursos</a>
                                             </h6>
-                                            
+
 
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">
                                                 Close
@@ -103,7 +99,9 @@
                         </div>
                     </div>
                 </div>
+ <br />
+ }
 
-                                    <br />}}
+}
 
 

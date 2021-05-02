@@ -16,20 +16,20 @@ namespace PortalEDU.Models
         //}
         [Key]
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Direccion { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Telefono { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Correo { get; set; }
         public string Tipo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Director { get; set; }
 
         [Display(Name = "Año Escolar")]
-        [Required]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int IdAnioAcademico { get; set; }
         [Required]
                 
