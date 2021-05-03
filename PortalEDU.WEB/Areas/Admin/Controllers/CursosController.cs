@@ -319,7 +319,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                                 if (archivos.Count() <= 0)
                                 {
                                     //ViewBag.errortarea = "Hubo un error al enviar su tare intente nuevamente";
-                                    TempData["tareaerror"] = "Hubo un error al enviar su tarea intente nuevamente";
+                                    TempData["tareaerror"] = "Hubo un error al enviar su tarea, por favor verifique todos los datos e intente nuevamente";
 
                                     return RedirectToAction("index", "cursos");
                                 }

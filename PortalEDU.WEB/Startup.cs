@@ -3,12 +3,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PortalEDU.AccesoDatos.Data;
 using PortalEDU.AccesoDatos.Data.Repository;
+using PortalEDU.Models;
+using PortalEDU.Utilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,14 +36,27 @@ namespace PortalEDU.WEB
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            //   .AddRoleManager<RoleManager<IdentityRole>>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            //services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //services.AddRazorPages();
+            //services.AddControllersWithViews();
+            ////services.AddScoped<IInicializadorDB, InicializadorDB>();
+            //services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+            ////services.AddSingleton<IEmailSender, EmailSender>();
 
             // este servicio agrega mensajes tipo toast para manerjar errores el paquete se llama
             //Vereyon.Web.FlashMessage

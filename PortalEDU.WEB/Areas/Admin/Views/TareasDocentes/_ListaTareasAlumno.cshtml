@@ -1,6 +1,6 @@
 ﻿@model PortalEDU.Models.ViewModels.TareaDocenteVM
 @{
-    ViewData["Title"] = "_ListaTareasAlumno";
+    ViewData["Title"] = "Lista Tareas Alumno";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
@@ -30,24 +30,28 @@
         <tr>
             <th>Alumno</th>
             <th>Id Alumno</th>
+            <th>Fecha de envío</th>
             <th>Descargar tarea</th>
-            @*<th>Age</th>*@
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.ListaTareaAlumno)
         {
-            <tr>
-                <td>@item.Alumno.Nombre</td>
-                <td>@item.IdAlumno</td>
-                <td> <a href="@item.Documento" target="_blank">Documento</a></td>
-            </tr>
+        <tr>
+            <td>@item.Alumno.Nombre</td>
+            <td>@item.IdAlumno</td>
+            <td>@item.Update</td>
+            <td> <a href="@item.Documento" target="_blank">Documento</a></td>
+
+        </tr>
         }
     </tbody>
     <tfoot>
         <tr>
             <th>Nombre</th>
             <th>Id Alumno</th>
+            <th>Fecha de envío</th>
             <th>Descargar tarea</th>
 
         </tr>
@@ -74,13 +78,13 @@
             var printCounter = 0;
             $('#example').DataTable(
                 {
+                    rowReorder: {
+                        selector: 'td:nth-child(4)'
+                    },
+                    responsive: true,
 
                 "language": {
-                "lengthMenu": "Display _MENU_ records per page",
-                "zeroRecords": "Nothing found - sorry",
-                "info": "Showing page _PAGE_ of _PAGES_",
-                "infoEmpty": "No records available",
-                        "infoFiltered": "(filtered from _MAX_ total records)",
+               
                         "sProcessing": "Procesando...",
 
                         "sLengthMenu": "Mostrar _MENU_ registros",
@@ -119,6 +123,7 @@
 
             },
 
+                  
                 
 
 

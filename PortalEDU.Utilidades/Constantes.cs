@@ -10,9 +10,8 @@ namespace PortalEDU.Utilidades
         public const string Anonimo = "Anonimo";
         public const string Docente = "Docente";
         public const string Alumno = "Alumno";
-        public const string Padre = "Padre";
-        public const string TipoPU = "Publico";
-        public const string TipoPR = "Privado";
+        public const string Responsable = "Responsable";
+
 
     }
 }

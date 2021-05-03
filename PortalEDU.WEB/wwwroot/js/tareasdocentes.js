@@ -8,7 +8,7 @@ $(document).ready(function () {
 function cargarDatatable() {
     var printCounter = 0;
     dataTable = $("#tblTareasDocentes").DataTable({
-
+       
         dom: 'Bfrtip',
         buttons: [
             'copy',
@@ -35,13 +35,6 @@ function cargarDatatable() {
                 messageBottom: null
             }
         ],
-
-
-
-        scrollCollapse: true,
-        scrollCollapse: true,
-        autoWidth: true,
-        paging: true,
 
 
         "ajax": {
@@ -123,7 +116,7 @@ function cargarDatatable() {
             }
         },
         "width": "100%"
-    }).columns.adjust().draw();
+    });
 }
 
 
