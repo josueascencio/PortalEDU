@@ -123,6 +123,20 @@
 
             <div class="form-group row">
                 <div class="col-4">
+                    <label> Correo Sesion</label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="alumno.IdUsuario"
+                            class="form-control"
+                            asp-items="@(new SelectList(Model.ApplicationUsers,"Id", "UserName",Model.IdentityRoleVM))">
+                        <option value="">-selecciona ID Sesion-</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
                     <label asp-for="alumno.Foto"> </label>
                 </div>
                 <div class="col-8 card">

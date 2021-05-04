@@ -52,6 +52,11 @@ namespace PortalEDU.Models
         public int? IdCalificaciones { get; set; }
 
 
+        public string? IdUsuario { get; set; }
+
+        [ForeignKey("IdUsuario")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         [ForeignKey("IdResponsable")]
         public virtual Responsable Responsable { get; set; }        
         [ForeignKey("IdCalificaciones")]

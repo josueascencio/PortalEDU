@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using PortalEDU.AccesoDatos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Docs.Samples;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
@@ -19,16 +21,19 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
     public class AlumnosController : Controller
     {
 
-
         private readonly IContenedorTrabajo _contenedorTrabajo;
         private readonly IWebHostEnvironment _hostinEnvironment;
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AlumnosController(ApplicationDbContext context, IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment)
+        public AlumnosController(ApplicationDbContext context, IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _contenedorTrabajo = contenedorTrabajo;
             _hostinEnvironment = hostinEnvironment;
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [HttpGet]
@@ -84,9 +89,21 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
                 ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable(),
 
+                ApplicationUsers = _userManager.Users.ToList(),
+
+                ListIdentityRole = _roleManager.Roles.Where(x => x.Name.Equals("Alumno")).ToList(),
+
+
+
+
+
                 // Articulo = new Models.
 
             };
+
+            //alumnoVM.ApplicationUsers = _userManager.Users.Include(_roleManager.Roles.Where(x => x.Name.Select("Admin")));
+
+             
 
             return View(alumnoVM);
 
@@ -372,7 +389,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         public IActionResult GetAll()
         {
-            return Json(new { data = _contenedorTrabajo.Alumno.GetAll(includeProperties: "CentroEducativo,Responsable") });
+            return Json(new { data = _contenedorTrabajo.Alumno.GetAll(includeProperties: "CentroEducativo,Responsable,ApplicationUser") });
 
         }
 

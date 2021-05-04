@@ -38,18 +38,18 @@ namespace PortalEDU.WEB
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+            services.AddSingleton<IEmailSender, EmailSender>();
 
 
-
-            //services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-            //   .AddRoleManager<RoleManager<IdentityRole>>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+               .AddRoleManager<RoleManager<IdentityRole>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
             //services.AddRazorPages();

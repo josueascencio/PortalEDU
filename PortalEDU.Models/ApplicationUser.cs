@@ -14,7 +14,7 @@ namespace PortalEDU.Models
         [MaxLength(5)]
         [Display(Name = "Codigo de su Centro Educativo")]
         public string CodigoCE { get; set; }
-        //public ICollection<Alumno> AlumnosIU { get; set; } 
+        public ICollection<Alumno> AlumnosIU { get; set; }
 
         //public ICollection<Docente> DocenteIU { get; set; } 
 

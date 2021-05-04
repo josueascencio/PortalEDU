@@ -35,7 +35,7 @@ namespace PortalEDU.AccesoDatos.Data
             var objDesdeDb = _db.Alumno.FirstOrDefault(s => s.Id == alumno.Id);
             objDesdeDb.Id = alumno.Id;
             objDesdeDb.Carnet = alumno.Carnet;
-            objDesdeDb.Nombre = alumno.Nombre;           
+            objDesdeDb.Nombre = alumno.Nombre;
             objDesdeDb.Apellido = alumno.Apellido;
             objDesdeDb.FechaNacimiento = alumno.FechaNacimiento;
             objDesdeDb.Direccion = alumno.Direccion;
@@ -45,6 +45,8 @@ namespace PortalEDU.AccesoDatos.Data
             objDesdeDb.IdCentroEducativo = alumno.IdCentroEducativo;
             objDesdeDb.IdResponsable = alumno.IdResponsable;
             objDesdeDb.AlumnoCursos = alumno.AlumnoCursos;
+            objDesdeDb.IdUsuario = alumno.IdUsuario;
+            objDesdeDb.ApplicationUser = alumno.ApplicationUser;
             _db.SaveChanges();
         }
 
