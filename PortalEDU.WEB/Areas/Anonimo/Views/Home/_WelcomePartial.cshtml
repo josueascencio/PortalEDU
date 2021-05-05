@@ -63,17 +63,27 @@
 
     </div>
 
- 
+
     <hr class="my-4">
     <p class="lead">
-        <a class="btn btn-outline-info btn-lg"
-           asp-area="Admin"
-           asp-controller="Cursos"
-           asp-action="@nameof(Index)" role="button">Cursos</a>
-        <a class="btn btn-outline-success btn-lg"
-           asp-area="Admin"
-           asp-controller="Salas"
-           asp-action="@nameof(Index)" role="button">Foro <i class="fa fa-pen-alt"></i></a>
+        @if (User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
+        {
+<a class="btn btn-outline-info btn-lg"
+   asp-area="Admin"
+   asp-controller="Cursos"
+   asp-action="@nameof(Index)" role="button">Cursos</a> }
+else
+{
+<a class="btn btn-outline-info btn-lg"
+   asp-area="Admin"
+   asp-controller="Cursos"
+   asp-action="@nameof(Index)" role="button">Cursos</a>
+
+                <a class="btn btn-outline-success btn-lg"
+                   asp-area="Admin"
+                   asp-controller="Salas"
+                   asp-action="@nameof(Index)" role="button">Foro <i class="fa fa-pen-alt"></i></a>}
+
     </p>
 </section>
 

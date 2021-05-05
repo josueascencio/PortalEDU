@@ -16,6 +16,10 @@ namespace PortalEDU.Models
         //}
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "El Codigo del Centro Escolar es obligatorio")]
+        [MaxLength(5, ErrorMessage = "{0} can have a max of {1} characters")]
+        [Display(Name = "Codigo de Centro Educativo")]
+        public string CodigoCE { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "Campo obligatorio")]

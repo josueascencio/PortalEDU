@@ -1,10 +1,22 @@
-﻿<div class="row">
-    <div class="col">
-        
-        <button type="submit" class="btn btn-success form-control">Crear</button>
-        &nbsp;
+﻿@if (User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno) || User.IsInRole(PortalEDU.Utilidades.Constantes.Responsable))
+{
+    <div class="row">
+
+        <div class="col">
+            <a asp-action="Index" class="btn btn-dark form-control">Volver a la vista</a>
+        </div>
     </div>
-    <div class="col">
-        <a asp-action="Index" class="btn btn-dark form-control">Volver a la vista</a>
+}
+else
+{
+    <div class="row">
+        <div class="col">
+
+            <button type="submit" class="btn btn-success form-control">Crear</button>
+            &nbsp;
+        </div>
+        <div class="col">
+            <a asp-action="Index" class="btn btn-dark form-control">Volver a la vista</a>
+        </div>
     </div>
-</div>
+}

@@ -12,7 +12,7 @@ using PortalEDU.AccesoDatos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Docs.Samples;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
@@ -71,7 +71,8 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
-
+            if (TempData["error"] != null)
+                ViewBag.error = TempData["error"].ToString();
 
 
             return View(alumnoVM);
@@ -103,7 +104,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             //alumnoVM.ApplicationUsers = _userManager.Users.Include(_roleManager.Roles.Where(x => x.Name.Select("Admin")));
 
-             
+
 
             return View(alumnoVM);
 
@@ -202,11 +203,11 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 alumno = new Models.Alumno(),
                 //AulaEnVM = new Aula(),
                 //CentroEduEnVM = new CentroEducativo(),
-                calificaciones = _contenedorTrabajo.Calificaciones.GetFirstOrDefault(m => m.IdAlumno==id)
+                calificaciones = _contenedorTrabajo.Calificaciones.GetFirstOrDefault(m => m.IdAlumno == id)
 
-             };
+            };
 
-
+           
             return View(homeVM);
         }
 
@@ -217,38 +218,38 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
-
-
-
-
-
-
         [HttpGet]
-
+        [Authorize]
         public IActionResult Edit(int? id)
         {
-
-            AlumnoVM alumnoVM = new AlumnoVM()
+            if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
             {
-
-                alumno = new PortalEDU.Models.Alumno(),
-
-                ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
-                ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable(),
-
-            // Articulo = new Models.
-
-        };
-
-            if (id != null)
-            {
-                alumnoVM.alumno = _contenedorTrabajo.Alumno.Get(id.GetValueOrDefault());
+               
+                return View("Index");
             }
-            alumnoVM.ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo();
-            alumnoVM.ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable();
-            return View(alumnoVM);
-        }
+            else
+            {
+                AlumnoVM alumnoVM = new AlumnoVM()
+                {
 
+                    alumno = new PortalEDU.Models.Alumno(),
+
+                    ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
+                    ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable(),
+
+                    // Articulo = new Models.
+
+                };
+
+                if (id != null)
+                {
+                    alumnoVM.alumno = _contenedorTrabajo.Alumno.Get(id.GetValueOrDefault());
+                }
+                alumnoVM.ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo();
+                alumnoVM.ListaResponsable = _contenedorTrabajo.Responsable.GetListaResponsable();
+                return View(alumnoVM);
+            }
+        }
 
 
 
@@ -321,7 +322,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         public async Task<IActionResult> _AddCourseModal(int studentID)
         {
-            
+
             ViewBag.StudentID = studentID;
             var courses = await _context.Curso.Include(s => s.Aula).ThenInclude(c => c.CentroEducativo).Where(x => x.AlumnoCursos.Any(y => y.IdAlumno == studentID) == false).ToListAsync();
             return PartialView(courses);
@@ -329,13 +330,13 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         public async Task<IActionResult> addEnrollment(AlumnoCurso enrollment)//int IdAlumno,int IdCursoD)
         {
             enrollment.Curso = await _context.Curso.SingleOrDefaultAsync(x => x.Id == enrollment.IdAlumno);
-        
+
             _context.AlumnoCurso.Add(enrollment);
-             await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             // Falta solucionar el retorno de la vista
             var alumnoDesdeDb = _contenedorTrabajo.Alumno.Get(enrollment.IdAlumno);
 
-            return RedirectToAction("Details","Alumnos",alumnoDesdeDb);
+            return RedirectToAction("Details", "Alumnos", alumnoDesdeDb);
         }
         public async Task<IActionResult> deleteEnrollment(int enrollmentID)
         {
@@ -346,7 +347,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
             var alumnoDesdeDb = _contenedorTrabajo.Alumno.Get(enrollment.IdAlumno);
             return RedirectToAction("Details", "Alumnos", alumnoDesdeDb);
 
-          
+
         }
         private bool StudentExists(int id)
         {
@@ -414,7 +415,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             _contenedorTrabajo.Alumno.Remove(articuloDesdeDb);
             _contenedorTrabajo.Save();
-                    
+
             return Json(new { success = true, message = "Articulo borrado con exito" });
         }
 

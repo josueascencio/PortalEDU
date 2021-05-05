@@ -9,7 +9,6 @@
 <br />
 <br />
 <br />
-
 @*Cuando no hay registros en las celdas*@
 <style>
     table td:empty::before {
@@ -20,13 +19,18 @@
 
 
 <div class="container">
+
+
     <div class="row">
         <div class="col-6">
             <h2 class="text-primary">Lista de Alumnos</h2>
         </div>
-        <div class="col-6 text-right">
-            <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"> </i> Crear nuevo alumno</a>
-        </div>
+        @if (User.IsInRole(PortalEDU.Utilidades.Constantes.Admin) || User.IsInRole(PortalEDU.Utilidades.Constantes.Docente))
+        {
+            <div class="col-6 text-right">
+                <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"> </i> Crear nuevo alumno</a>
+            </div>
+        }
     </div>
 
     <br />
@@ -35,6 +39,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Codigo CE</th>
                 <th>Carnet</th>
                 <th>Nombre</th>
                 <th>Apellido</th>

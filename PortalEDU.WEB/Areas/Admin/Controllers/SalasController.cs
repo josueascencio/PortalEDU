@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortalEDU.AccesoDatos.Data;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class SalasController : Controller
     {

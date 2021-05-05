@@ -4,12 +4,11 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<h1>Editar</h1>
-
 <br />
 <br />
+<br />
+<br />
+
 <h3 class="text-center">Editar Alumno</h3>
 <form asp-action="Edit" method="post" enctype="multipart/form-data">
     <div class="row px-2 mx-2 border">
@@ -18,6 +17,15 @@
         <input type="hidden" value="@DateTime.Now" asp-for="alumno.update" />
         <div class="col-10 offset-1 mt-4">
 
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="alumno.CodigoCE"> </label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="alumno.CodigoCE" class="form-control" />
+                    <span asp-validation-for="alumno.CodigoCE" class="text-danger"> </span>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <div class="col-4">
@@ -139,10 +147,10 @@
                 <div class="col-8 offset-4">
                     <div class="row">
                         <div class="col">
-                            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model.alumno.Id}">Actualizar</button>
+                            <button type="submit" class="btn btn-info form-control" asp-route-id="@Model.alumno.Id}">Actualizar</button>
                         </div>
                         <div class="col">
-                            <a asp-action="Index" class="btn btn-success form-control">Volver a la vista</a>
+                            <a asp-action="Index" class="btn btn-dark form-control">Volver a la vista</a>
                         </div>
                     </div>
                 </div>

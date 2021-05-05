@@ -67,7 +67,7 @@ namespace PortalEDU.WEB.Areas.Identity.Pages.Account
 
             [Required(ErrorMessage = "El Codigo del Centro Escolar es obligatorio")]
             [MaxLength(5, ErrorMessage = "{0} can have a max of {1} characters")]
-            [Display(Name = "Codigo de su Centro Educativo")]
+            [Display(Name = "Codigo de Centro Educativo")]
             public string CodigoCE { get; set; }
         }
 

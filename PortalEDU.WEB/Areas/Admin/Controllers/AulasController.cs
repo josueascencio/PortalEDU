@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PortalEDU.AccesoDatos.Data.Repository;
 using PortalEDU.Models.ViewModels;
 using System;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class AulasController : Controller
     {

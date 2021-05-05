@@ -15,6 +15,7 @@ using PortalEDU.Models.ViewModels;
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
     [Area("Admin")]
+ 
     public class CursosController : Controller
     {
         private readonly ApplicationDbContext _context;

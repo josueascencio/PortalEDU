@@ -45,7 +45,7 @@
                     <label asp-for="FechaInicio" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input type="datetime-local" asp-for="FechaInicio" class="form-control" />
+                    <input type="datetime-local" id="input_doc" asp-for="FechaInicio" class="form-control" />
                     <span asp-validation-for="FechaInicio" class="text-danger"></span>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     <label asp-for="FechaFinal" class="control-label"></label>
                 </div>
                 <div class="col-8">
-                    <input type="datetime-local" asp-for="FechaFinal" class="form-control" />
+                    <input type="datetime-local" id="input_doc" asp-for="FechaFinal" class="form-control" />
                     <span asp-validation-for="FechaFinal" class="text-danger"></span>
                 </div>
             </div>
@@ -80,13 +80,52 @@
                 </div>
             </div>
 
+            
+
             <div class="form-group row">
                 <div class="col-8 offset-4">
-                    <partial name="_VistaCrearVolver" />
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" onclick="return validateInput()" class="btn btn-success form-control">Crear</button>
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-dark form-control">Regresar a lista</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
+
 
         </div>
     </div>
 </form>
 
+<script>
+
+        function seleccionarImagen() {
+            var archivo = document.getElementById("SubidaFotoAlumno").files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                document.getElementById("imgFoto").src = reader.result;
+            }
+            reader.readAsDataURL(archivo);
+        };
+
+
+
+        function validateInput() {
+            if (document.getElementById("input_doc").value == "") {
+                swal("Error", "Por favor complete todos los campos", "error");
+                return false;
+            }
+            return true;
+        };
+
+
+
+
+
+</script>

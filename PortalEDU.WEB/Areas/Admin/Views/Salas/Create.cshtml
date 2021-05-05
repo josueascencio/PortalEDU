@@ -5,10 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <br />
 <br />
-
+<br />
+<br />
+<br />
+<br />
+<h3 class="text-center">Crear un nuevo foro de seguimiento</h3>
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <input type="hidden" value="@DateTime.Now.ToLocalTime()" asp-for="SalaEnVM.FechaPublicacion" />
     <div class="row px-2 mx-2 border">
@@ -63,17 +66,17 @@
                     <span asp-validation-for="SalaEnVM.Contenido" class="text-danger"> </span>
                 </div>
             </div>
-            
+
 
             <div class="form-group row">
                 <div class="col-8 offset-4">
 
                     <div class="row">
                         <div class="col">
-                            <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">Crear</button>
+                            <button type="submit" onclick="return validateInput()" class="btn btn-success form-control">Crear</button>
                         </div>
                         <div class="col">
-                            <a asp-action="Index" class="btn btn-success form-control">Regresar a lista</a>
+                            <a asp-action="Index" class="btn btn-dark form-control">Regresar a lista</a>
                         </div>
                     </div>
 
@@ -95,5 +98,5 @@
             return true;
         };
 
-    
+
 </script>

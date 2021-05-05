@@ -13,7 +13,8 @@ function cargarDatatable() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "id", "width": "10%" },
+            { "data": "id", "width": "10%" },	
+            { "data": "codigoCE", "width": "10%" },
             { "data": "carnet", "width": "10%" },
             { "data": "nombre", "width": "10%" },
             { "data": "apellido", "width": "10%" },

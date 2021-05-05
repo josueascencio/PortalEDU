@@ -1,0 +1,50 @@
+﻿@if (User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
+{
+<li class="nav-item active">
+    <a class="navbar-brand" asp-area="Anonimo" asp-controller="Home" asp-action="Index">
+
+        <i class="fas fa-home" style="color:white"></i>
+        @*<span class="sr-only">(current)</span>*@
+    </a>
+</li>
+
+<!--<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Configuracion</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Crear Usuario de Sesion</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="Ciclos" asp-action="Index">Ciclo Academico</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="CentrosEducativos" asp-action="Index">Centro Educativo</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="Aulas" asp-action="Index">Aula</a>-->
+        @*<div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>*@
+    <!--</div>
+</li>-->
+
+
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Cursos" asp-action="Index">Cursos</a>
+</li>
+@*<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Calificaciones" asp-action="Index">Calificaciones</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="TareasDocentes" asp-action="Index">Crear tarea</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Salas" asp-action="Index">Foro de discusion</a>
+</li>*@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion de Usuarios</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumno</a>
+        @*<a class="dropdown-item" asp-area="Admin" asp-controller="Docentes" asp-action="Index">Docente</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="Responsables" asp-action="Index">Responsable</a>*@
+        @*<div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>*@
+    </div>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link btn btn-outline-info" href="https://localhost:44383/api/sync" target="_self">API</a>
+</li>
+}

@@ -12,6 +12,5 @@ namespace PortalEDU.Utilidades
         public const string Alumno = "Alumno";
         public const string Responsable = "Responsable";
 
-
     }
 }

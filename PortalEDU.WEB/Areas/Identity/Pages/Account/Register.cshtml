@@ -12,8 +12,8 @@
 
 <h1>Registro de usuarios para inicio de sesion</h1>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row px-2 mx-2 border">
+    <div class="col-6 offset-3 mt-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Crear una nueva cuenta</h4>
             <hr />
@@ -58,7 +58,7 @@
 
             <br />
 
-            <button type="submit" class="btn btn-primary">Registrarse</button>
+            <button type="submit" class="btn btn-success offset-4">Registrar usuario</button>
         </form>
     </div>
     @*<div class="col-md-6 col-md-offset-2">
@@ -91,6 +91,7 @@
                 }
             </section>
         </div>*@
+  
 </div>
 
 @section Scripts {
