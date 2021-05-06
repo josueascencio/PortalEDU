@@ -11,10 +11,15 @@ namespace PortalEDU.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Apellido { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Telefono { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Profesion { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Direccion { get; set; }
         
         public string Foto { get; set; }

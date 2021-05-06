@@ -49,6 +49,7 @@ function cargarDatatable() {
         },
         "columns": [
             { "data": "id", "width": "10%" },
+            { "data": "codigoCE", "width": "10%" },
             { "data": "nombre", "width": "10%" },
             { "data": "direccion", "width": "10%" },
             { "data": "correo", "width": "10%" },

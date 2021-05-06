@@ -37,9 +37,16 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string idsesion)
         {
+            //var usuariologin = _context.Alumno.FirstOrDefault(x=>x.IdUsuario == idsesion).ToString();
+            //var username = User.Identity.Name.ToString();
+            //if (username != usuariologin)
+            //{
 
+            //    return View("Index");
+            //}
+            //else { 
             //AlumnoVM alumnoVM = new AlumnoVM()
             //{
             //    alumno = new Alumno(),
@@ -71,11 +78,9 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
-            if (TempData["error"] != null)
-                ViewBag.error = TempData["error"].ToString();
-
 
             return View(alumnoVM);
+            //}
         }
 
 
@@ -207,7 +212,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
             };
 
-           
+
             return View(homeVM);
         }
 
@@ -224,8 +229,8 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         {
             if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
             {
-               
-                return View("Index");
+
+                return RedirectToAction("Index");
             }
             else
             {
@@ -390,36 +395,78 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         public IActionResult GetAll()
         {
-            return Json(new { data = _contenedorTrabajo.Alumno.GetAll(includeProperties: "CentroEducativo,Responsable,ApplicationUser") });
+            if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
+            {
+
+                return Json(new
+                {
+                    data = _contenedorTrabajo.Alumno.GetAll(
+                 includeProperties: "CentroEducativo,Responsable,ApplicationUser")
+                 .Where(x => x.IdUsuario == _userManager.GetUserId(HttpContext.User))
+                });
+            }
+
+
+            else
+            {
+
+                return Json(new
+                {
+                    data = _contenedorTrabajo.Alumno.GetAll(
+                 includeProperties: "CentroEducativo,Responsable,ApplicationUser")
+
+                });
+
+            }
 
         }
 
 
         public IActionResult Delete(int id)
         {
-            var articuloDesdeDb = _contenedorTrabajo.Alumno.Get(id);
-            string rutaDirectorioPrincipal = _hostinEnvironment.WebRootPath;
-            var rutaImagen = Path.Combine(rutaDirectorioPrincipal, articuloDesdeDb.Foto.TrimStart('\\'));
-
-            if (System.IO.File.Exists(rutaImagen))
+            if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
             {
-                System.IO.File.Delete(rutaImagen);
+
+                return RedirectToAction("Index");
             }
 
-            if (articuloDesdeDb == null)
-
+            else
             {
-                return Json(new { success = false, message = "Error al intentar borrar articulo" });
+                var articuloDesdeDb = _contenedorTrabajo.Alumno.Get(id);
+
+
+                if (articuloDesdeDb == null)
+
+                {
+                    TempData["Error"] = "Error al eliminar responsable";
+                    return Json(new { success = false, message = "Error al intentar borrar articulo" });
+
+                }
+                try
+                {
+                    _contenedorTrabajo.Alumno.Remove(articuloDesdeDb);
+                    _contenedorTrabajo.Save();
+
+                    return Json(new { success = true, message = "Articulo borrado con exito" });
+                }
+                catch (Exception)
+                {
+
+                    string rutaDirectorioPrincipal = _hostinEnvironment.WebRootPath;
+                    var rutaImagen = Path.Combine(rutaDirectorioPrincipal, articuloDesdeDb.Foto.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(rutaImagen))
+                    {
+                        System.IO.File.Delete(rutaImagen);
+                    }
+
+                    TempData["error"] = "Error al eliminar responsable";
+                    return Json(new { success = false, message = "El registro no se puede eliminar, está asociado a otros registros" });
+                }
 
             }
 
-            _contenedorTrabajo.Alumno.Remove(articuloDesdeDb);
-            _contenedorTrabajo.Save();
-
-            return Json(new { success = true, message = "Articulo borrado con exito" });
         }
-
-
 
 
         #endregion

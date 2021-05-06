@@ -1,19 +1,24 @@
 ﻿@model PortalEDU.Models.ViewModels.HomeVM
- 
 
 
-    @{ ViewData["Title"] = "Home Page"; }
-    <br />
-    <partial name="_WelcomePartial" />
 
-    <header class="d-flex flex-wrap justify-content-between align-items-center">
-        <div class="text-center">
-            <h2>Salones de clase</h2>
-        </div>
-        
-        @*<partial name="_SearchPartial" for="Search" />*@
-    </header>
+@{ ViewData["Title"] = "Home Page"; }
+<br />
+<partial name="_WelcomePartial" />
 
-    <partial name="_AulaCardPartial" model="@Model" />
+<header class="d-flex flex-wrap justify-content-between align-items-center">
+    <div class="text-center">
+        <h2>Salones de clase</h2>
+    </div>
+
+    @*<partial name="_SearchPartial" for="Search" />*@
+</header>
+@if (User.Identity.IsAuthenticated)
+{
+    <partial name="_AulaCardPartial" model="@Model" />  }
+else { 
+<p>Parta ver las Aulas debe de estar autenticado</p>
+}
+
 
 

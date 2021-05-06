@@ -8,128 +8,132 @@
 <br />
 
 <h1>Listado de cursos</h1>
-
-<p>
-    <a class=" btn btn-success fas fa-plus" type="button" asp-action="Create"> Crear un curso</a>
-</p>
-
-@if (ViewBag.errortarea != null)
+   
+@if (User.IsInRole(PortalEDU.Utilidades.Constantes.Admin) || User.IsInRole(PortalEDU.Utilidades.Constantes.Docente))
 {
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger alert-dismissable">
-
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                        ×
-                    </button>
-                    <h4>
-                    </h4> <strong>¡Atención! </strong> @ViewBag.errortarea<a href="#" class="alert-link"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-}
-else if (ViewBag.tareaexito != null)
-{
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success alert-dismissable">
-
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                        ×
-                    </button>
-                    <h4>
-                    </h4> <strong>¡Exito! </strong> @ViewBag.tareaexito<a href="#" class="alert-link"></a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <p>
+        <a class=" btn btn-success fas fa-plus" type="button" asp-action="Create"> Crear un curso</a>
+    </p>
 
 }
 
-@if (Model.ListaCursos.Count() > 0)
-{
-    @if (Model != null)
+    @if (ViewBag.errortarea != null)
     {
-        //var btnEvaluateStyle = Model.CanBeEvaluated ? "btn-info" : "btn-outline-info";
-        <section class="d-flex flex-wrap card-deck">
-            @foreach (var curso in Model.CursoEnVM.OrderBy(o => o.Nombre))
-            {
 
-                TimeSpan diferencia = curso.FechaFinal.Value.Date - curso.FechaInicio.Value.Date;
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-danger alert-dismissable">
 
-                <article class="card-group col-sm-6 col-lg-3 my-2">
-                    <div class="card course-card border-info">
-                        <div class="card-header bg-info small d-flex flex-wrap justify-content-between">
-                            <div><i class="fa fa-clock"></i> @curso.FechaInicio.Value.Date</div>
-                            <div><i class="fa fa-hourglass"></i>@diferencia.TotalDays Dias</div>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4>
+                        </h4> <strong>¡Atención! </strong> @ViewBag.errortarea<a href="#" class="alert-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                <img src="~/imagenes/cursos/klipartz.com.png" alt="Course" class="w-100" />
+    }
+    else if (ViewBag.tareaexito != null)
+    {
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissable">
+
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×
+                        </button>
+                        <h4>
+                        </h4> <strong>¡Exito! </strong> @ViewBag.tareaexito<a href="#" class="alert-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    @if (Model.ListaCursos.Count() > 0)
+    {
+        @if (Model != null)
+        {
+            //var btnEvaluateStyle = Model.CanBeEvaluated ? "btn-info" : "btn-outline-info";
+            <section class="d-flex flex-wrap card-deck">
+                @foreach (var curso in Model.CursoEnVM.OrderBy(o => o.Nombre))
+                {
+
+                    TimeSpan diferencia = curso.FechaFinal.Value.Date - curso.FechaInicio.Value.Date;
+
+                    <article class="card-group col-sm-6 col-lg-3 my-2">
+                        <div class="card course-card border-info">
+                            <div class="card-header bg-info small d-flex flex-wrap justify-content-between">
+                                <div><i class="fa fa-clock"></i> @curso.FechaInicio.Value.Date</div>
+                                <div><i class="fa fa-hourglass"></i>@diferencia.TotalDays Dias</div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+
+                                    <img src="~/imagenes/cursos/klipartz.com.png" alt="Course" class="w-100" />
+                                </div>
+                            </div>
+                            <div class="card-body d-flex justify-content-center align-items-center ">
+                                @*<h5 class="card-title text-center">@curso.Nombre</h5>*@
+                                <div class="bg-info text-white shadow py-2 px-2">@curso.Nombre</div>
+                            </div>
+
+                            @*@if (Model.TrainerName != null)
+                                {*@
+                            <div class="card-footer">@curso.Aula.CentroEducativo.Nombre</div>
+
+                            @*@if (Model.IsActive)
+                                {*@
+                            <div class="card-footer text-uppercase shadow">
+                                <div class="bg-success text-white shadow py-2">@curso.Aula.Nombre</div>
+                            </div>
+                            @*else if (Model.IsUpcoming)
+                                {*@
+                            @*<div class="card-footer text-uppercase shadow">
+                                    <div class="bg-info text-white shadow py-2">Upcoming</div>
+                                </div>*@
+
+                            <div class="card-footer d-flex flex-wrap justify-content-around align-items-center">
+
+                                @*<a asp-controller="@WebConstants.TrainersController"
+                                    asp-action="@nameof(TrainersController.Students)"
+                                    asp-route-id="@Model.Id" class="btn @btnEvaluateStyle" data-toggle="tooltip" title="Students">*@
+                                <!--<i class="fa fa-user-graduate"></i>||-->
+                                @*</a>*@
+
+                                <a asp-controller="Cursos"
+                                   asp-action="Tareas"
+                                   asp-route-id="@curso.Id"
+                                   class="btn btn-outline-info" data-toggle="tooltip" title="Tareas">
+                                    Enviar tareas
+                                    <i class="fa fa-folder-open"></i>
+                                </a>
+
+                                @*<partial name="_AdminCourseActionsPartial" for="Id" />*@
                             </div>
                         </div>
-                        <div class="card-body d-flex justify-content-center align-items-center ">
-                            @*<h5 class="card-title text-center">@curso.Nombre</h5>*@
-                            <div class="bg-info text-white shadow py-2 px-2">@curso.Nombre</div>
-                        </div>
-
-                        @*@if (Model.TrainerName != null)
-                            {*@
-                        <div class="card-footer">@curso.Aula.CentroEducativo.Nombre</div>
-
-                        @*@if (Model.IsActive)
-                            {*@
-                        <div class="card-footer text-uppercase shadow">
-                            <div class="bg-success text-white shadow py-2">@curso.Aula.Nombre</div>
-                        </div>
-                        @*else if (Model.IsUpcoming)
-                            {*@
-                        @*<div class="card-footer text-uppercase shadow">
-                                <div class="bg-info text-white shadow py-2">Upcoming</div>
-                            </div>*@
-
-                        <div class="card-footer d-flex flex-wrap justify-content-around align-items-center">
-
-                            @*<a asp-controller="@WebConstants.TrainersController"
-                                asp-action="@nameof(TrainersController.Students)"
-                                asp-route-id="@Model.Id" class="btn @btnEvaluateStyle" data-toggle="tooltip" title="Students">*@
-                            <!--<i class="fa fa-user-graduate"></i>||-->
-                            @*</a>*@
-
-                            <a asp-controller="Cursos"
-                               asp-action="Tareas"
-                               asp-route-id="@curso.Id"
-                               class="btn btn-outline-info" data-toggle="tooltip" title="Tareas">
-                                Enviar tareas
-                                <i class="fa fa-folder-open"></i>
-                            </a>
-
-                            @*<partial name="_AdminCourseActionsPartial" for="Id" />*@
-                        </div>
-                    </div>
-                </article>}
+                    </article>}
 
 
-            @*<td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-                </tr>*@
+                @*<td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                    </tr>*@
 
-            <!--</tbody>
-            </table>-->
+                <!--</tbody>
+                </table>-->
 
 
-        </section>} }
-else
-{
-    <h4> No hay cursos creados</h4>
-}
+            </section>} }
+    else
+    {
+        <h4> No hay cursos creados</h4>
+    }

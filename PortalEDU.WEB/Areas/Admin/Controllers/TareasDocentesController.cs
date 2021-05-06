@@ -65,25 +65,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         }
 
 
-        //public IActionResult _TareaDocentePartial(int? id)
-        //{
-
-        //    AlumnoVM homeVM = new AlumnoVM()
-        //    {
-        //        ListaCalificaciones = _contenedorTrabajo.Calificaciones.GetAll(),
-        //        alumno = new Models.Alumno(),
-        //        //AulaEnVM = new Aula(),
-        //        //CentroEduEnVM = new CentroEducativo(),
-        //        calificaciones = _contenedorTrabajo.Calificaciones.GetFirstOrDefault(m => m.IdAlumno == id)
-
-        //    };
-
-
-        //    return PartialView("_TareaDocentePartia",homeVM);
-        //}
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

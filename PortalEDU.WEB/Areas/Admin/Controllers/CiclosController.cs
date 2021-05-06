@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PortalEDU.AccesoDatos.Data.Repository;
+using PortalEDU.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,19 +43,19 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(CentroEducativoVM centroEducativoVM)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _contenedorTrabajo.CentroEducativo.Add(centroEducativoVM.centroEducativo);
-        //        _contenedorTrabajo.Save();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
-        //    return View(centroEducativoVM);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Ciclo ciclo)
+        {
+            if (ModelState.IsValid)
+            {
+                _contenedorTrabajo.Ciclo.Add(ciclo);
+                _contenedorTrabajo.Save();
+                return RedirectToAction(nameof(Index));
+            }
+            //centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
+            return View();
+        }
 
 
 

@@ -21,18 +21,6 @@
 </li>
 
 
-<li class="nav-item">
-    <a class="nav-link" asp-area="Admin" asp-controller="Cursos" asp-action="Index">Cursos</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" asp-area="Admin" asp-controller="Calificaciones" asp-action="Index">Ingresar Calificaciones</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" asp-area="Admin" asp-controller="TareasDocentes" asp-action="Index">Crear tarea</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" asp-area="Admin" asp-controller="Salas" asp-action="Index">Foro de discusion</a>
-</li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administracion de Usuarios</a>
     <div class="dropdown-menu">
@@ -40,9 +28,24 @@
         <a class="dropdown-item" asp-area="Admin" asp-controller="Responsables" asp-action="Index">Responsable</a>
         <a class="dropdown-item" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumno</a>
         @*<div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Separated link</a>*@
+            <a class="dropdown-item" href="#">Separated link</a>*@
     </div>
 </li>
+
+
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Cursos" asp-action="Index">Cursos</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="TareasDocentes" asp-action="Index">Crear tarea</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Calificaciones" asp-action="Index">Ingresar Calificaciones</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" asp-area="Admin" asp-controller="Salas" asp-action="Index">Foro de discusion</a>
+</li>
+
 
 <li class="nav-item">
     <a class="nav-link btn btn-outline-info" href="https://localhost:44383/api/sync" target="_self">API</a>

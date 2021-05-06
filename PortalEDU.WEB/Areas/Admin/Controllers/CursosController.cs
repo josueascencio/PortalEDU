@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +15,7 @@ using PortalEDU.Models.ViewModels;
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
  
     public class CursosController : Controller
@@ -88,6 +90,11 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         // GET: Admin/Cursoes/Create
         public IActionResult Create()
         {
+            if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
+            {
+
+                return RedirectToAction("Index");
+            }
             ViewData["IdAula"] = new SelectList(_context.Aula, "Id", "Nombre");
             return View();
         }

@@ -23,7 +23,7 @@ namespace SyncPortalClient
 
         static async Task Main(string[] args)
         {
-            Console.WriteLine("POr favor verifique que la API del Portal Educativo se encuentre activa antes de sincronizar");
+            Console.WriteLine("Por favor verifique que la API del Portal Educativo se encuentre activa antes de sincronizar");
             Console.ReadLine();
             await SynchronizeAsync();
         }

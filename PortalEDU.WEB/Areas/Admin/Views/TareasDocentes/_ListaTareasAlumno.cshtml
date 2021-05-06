@@ -27,6 +27,7 @@
             <th>Alumno</th>
             <th>Id Alumno</th>
             <th>Fecha de envío</th>
+            <th>Comentarios del estudiante</th>
             <th>Descargar tarea</th>
 
         </tr>
@@ -38,20 +39,22 @@
             <td>@item.Alumno.Nombre</td>
             <td>@item.IdAlumno</td>
             <td>@item.Update</td>
+            <td>@item.Comnetario</td>
             <td> <a href="@item.Documento" target="_blank">Documento</a></td>
 
         </tr>
         }
     </tbody>
-    <tfoot>
+    @*<tfoot>
         <tr>
             <th>Nombre</th>
             <th>Id Alumno</th>
             <th>Fecha de envío</th>
+            <th>Comentarios del estudiante</th>
             <th>Descargar tarea</th>
 
         </tr>
-    </tfoot>
+    </tfoot>*@
 </table>
 
 

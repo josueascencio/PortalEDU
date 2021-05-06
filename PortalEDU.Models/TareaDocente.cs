@@ -16,13 +16,19 @@ namespace PortalEDU.Models
 
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
         [DataType(DataType.Date)]
         public DateTime? FechaCreacion { get; set; }
+
+        [Required(ErrorMessage = "Campo obligatorio")]
         [DataType(DataType.Date)]
         public DateTime? FechaFinalizacion { get; set; }
         public string Documento { get; set; }
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int? Puntuacion { get; set; }
         public string Comentario { get; set; }
         public int? IdDocente { get; set; }
