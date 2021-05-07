@@ -39,37 +39,11 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index(string idsesion)
         {
-            //var usuariologin = _context.Alumno.FirstOrDefault(x=>x.IdUsuario == idsesion).ToString();
-            //var username = User.Identity.Name.ToString();
-            //if (username != usuariologin)
-            //{
-
-            //    return View("Index");
-            //}
-            //else { 
-            //AlumnoVM alumnoVM = new AlumnoVM()
-            //{
-            //    alumno = new Alumno(),
-
-            //    ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
-            //    ListaResponsable= _contenedorTrabajo.Responsable.GetListaResponsable(),
-
-
-            //    // Articulo = new Models.
-
-            //};
 
 
             AlumnoVM alumnoVM = new AlumnoVM()
             {
-                //    alumno = new Alumno(),
-
-                //    ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo(),
-                //    ListaResponsable= _contenedorTrabajo.Responsable.GetListaResponsable(),
-
-
-                //    // Articulo = new Models.
-
+   
                 alumnos = _contenedorTrabajo.Alumno.GetAll().ToList(),
 
             };
@@ -101,13 +75,9 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
-
-
-                // Articulo = new Models.
-
             };
 
-            //alumnoVM.ApplicationUsers = _userManager.Users.Include(_roleManager.Roles.Where(x => x.Name.Select("Admin")));
+      
 
 
 
@@ -178,25 +148,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         }
 
 
-
-
-        //public async Task<IActionResult> Notas(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var curso = await _context.Calificaciones
-        //        .Include(c => c.Alumno)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (curso == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(curso);
-        //}
 
 
         public IActionResult Notas(int? id)
@@ -365,29 +316,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #region LLAMADAS A LAS API
 
 
@@ -395,7 +323,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         public IActionResult GetAll()
         {
-            if (HttpContext.User.IsInRole(PortalEDU.Utilidades.Constantes.Alumno))
+            if (HttpContext.User.IsInRole(Utilidades.Constantes.Alumno))
             {
 
                 return Json(new
@@ -406,8 +334,16 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 });
             }
 
+            else if (HttpContext.User.IsInRole(Utilidades.Constantes.Responsable))
+            {
 
-            else
+                return Json(new
+                {
+                    data = _contenedorTrabajo.Alumno.GetAll(
+                includeProperties: "CentroEducativo,Responsable,ApplicationUser")
+                .Where(x => x.Responsable.Id==x.IdResponsable)
+                });
+            }
             {
 
                 return Json(new

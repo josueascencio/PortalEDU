@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SyncPortalClient": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SOME_RANDOM_KEY_DO_NOT_SHARE": "QWEPOIEWPOIQPOWEMJDALKDÑLKASDLJASDJJDSFJLDSFJJL"
+      }
+    }
+  }
+}

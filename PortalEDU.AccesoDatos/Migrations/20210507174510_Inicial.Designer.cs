@@ -10,8 +10,8 @@ using PortalEDU.AccesoDatos.Data;
 namespace PortalEDU.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210410160605_deletealumnocurso")]
-    partial class deletealumnocurso
+    [Migration("20210507174510_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,10 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -135,6 +139,8 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -164,12 +170,10 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -206,12 +210,10 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -235,6 +237,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CodigoCE")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
                     b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -245,11 +252,17 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IdCalificaciones")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdCentroEducativo")
                         .HasColumnType("int");
 
                     b.Property<int?>("IdResponsable")
                         .HasColumnType("int");
+
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
@@ -263,11 +276,40 @@ namespace PortalEDU.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdCalificaciones");
+
                     b.HasIndex("IdCentroEducativo");
 
                     b.HasIndex("IdResponsable");
 
+                    b.HasIndex("IdUsuario");
+
                     b.ToTable("Alumno");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.AlumnoCurso", b =>
+                {
+                    b.Property<int>("IdAlumnoCurso")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdAlumno")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdCurso")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Update")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("IdAlumnoCurso");
+
+                    b.HasIndex("IdAlumno");
+
+                    b.HasIndex("IdCurso");
+
+                    b.ToTable("AlumnoCurso");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Aula", b =>
@@ -305,33 +347,31 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("CuartoTrimestre")
+                    b.Property<decimal?>("CuartoTrimestre")
                         .HasColumnType("decimal (18,4)");
 
                     b.Property<int>("IdAlumno")
                         .HasColumnType("int");
 
-                    b.Property<int?>("IdAlumnoNavigationId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PrimerTrimestre")
+                    b.Property<decimal?>("PrimerTrimestre")
                         .HasColumnType("decimal (18,4)");
 
-                    b.Property<decimal>("Promedio")
+                    b.Property<decimal?>("Promedio")
                         .HasColumnType("decimal (18,4)");
 
-                    b.Property<decimal>("SegundoTrimestre")
+                    b.Property<decimal?>("SegundoTrimestre")
                         .HasColumnType("decimal (18,4)");
 
-                    b.Property<decimal>("TercerTrimestre")
+                    b.Property<decimal?>("TercerTrimestre")
                         .HasColumnType("decimal (18,4)");
 
-                    b.Property<DateTime>("update")
+                    b.Property<DateTime>("Update")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdAlumnoNavigationId");
+                    b.HasIndex("IdAlumno")
+                        .IsUnique();
 
                     b.ToTable("Calificaciones");
                 });
@@ -342,6 +382,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CodigoCE")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
 
                     b.Property<string>("Correo")
                         .IsRequired()
@@ -520,6 +565,9 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IdUsuario")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
@@ -537,7 +585,71 @@ namespace PortalEDU.AccesoDatos.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdUsuario");
+
                     b.ToTable("Responsable");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.Sala", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Autor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaPublicacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("IdDocente")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdResponsable")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDocente");
+
+                    b.HasIndex("IdResponsable");
+
+                    b.ToTable("Sala");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.SalaComentario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Contenido")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaPublicacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("IdSala")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdSala");
+
+                    b.ToTable("SalaComentario");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.TareaAlumno", b =>
@@ -548,6 +660,7 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comnetario")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Documento")
@@ -591,9 +704,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("FechaCreacion")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("FechaFinalizacion")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("IdCurso")
@@ -603,9 +718,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Puntuacion")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Update")
@@ -618,6 +735,18 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.HasIndex("IdDocente");
 
                     b.ToTable("TareaDocente");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("CodigoCE")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -673,6 +802,10 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Alumno", b =>
                 {
+                    b.HasOne("PortalEDU.Models.Calificaciones", "Calificaciones")
+                        .WithMany()
+                        .HasForeignKey("IdCalificaciones");
+
                     b.HasOne("PortalEDU.Models.CentroEducativo", "CentroEducativo")
                         .WithMany()
                         .HasForeignKey("IdCentroEducativo")
@@ -683,9 +816,36 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .WithMany("AlumnoLista")
                         .HasForeignKey("IdResponsable");
 
+                    b.HasOne("PortalEDU.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("AlumnosIU")
+                        .HasForeignKey("IdUsuario");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Calificaciones");
+
                     b.Navigation("CentroEducativo");
 
                     b.Navigation("Responsable");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.AlumnoCurso", b =>
+                {
+                    b.HasOne("PortalEDU.Models.Alumno", "Alumno")
+                        .WithMany("AlumnoCursos")
+                        .HasForeignKey("IdAlumno")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PortalEDU.Models.Curso", "Curso")
+                        .WithMany("AlumnoCursos")
+                        .HasForeignKey("IdCurso")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Alumno");
+
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Aula", b =>
@@ -701,11 +861,13 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Calificaciones", b =>
                 {
-                    b.HasOne("PortalEDU.Models.Alumno", "IdAlumnoNavigation")
+                    b.HasOne("PortalEDU.Models.Alumno", "Alumno")
                         .WithMany()
-                        .HasForeignKey("IdAlumnoNavigationId");
+                        .HasForeignKey("IdAlumno")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("IdAlumnoNavigation");
+                    b.Navigation("Alumno");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.CentroEducativo", b =>
@@ -756,6 +918,41 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Navigation("IdDocenteNavigation");
                 });
 
+            modelBuilder.Entity("PortalEDU.Models.Responsable", b =>
+                {
+                    b.HasOne("PortalEDU.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("ResponsableIU")
+                        .HasForeignKey("IdUsuario");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.Sala", b =>
+                {
+                    b.HasOne("PortalEDU.Models.Docente", "Docente")
+                        .WithMany()
+                        .HasForeignKey("IdDocente");
+
+                    b.HasOne("PortalEDU.Models.Responsable", "Responsable")
+                        .WithMany("Salas")
+                        .HasForeignKey("IdResponsable");
+
+                    b.Navigation("Docente");
+
+                    b.Navigation("Responsable");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.SalaComentario", b =>
+                {
+                    b.HasOne("PortalEDU.Models.Sala", "Sala")
+                        .WithMany("SalaComentarios")
+                        .HasForeignKey("IdSala")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Sala");
+                });
+
             modelBuilder.Entity("PortalEDU.Models.TareaAlumno", b =>
                 {
                     b.HasOne("PortalEDU.Models.Alumno", "Alumno")
@@ -790,6 +987,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                     b.Navigation("Docente");
                 });
 
+            modelBuilder.Entity("PortalEDU.Models.Alumno", b =>
+                {
+                    b.Navigation("AlumnoCursos");
+                });
+
             modelBuilder.Entity("PortalEDU.Models.CentroEducativo", b =>
                 {
                     b.Navigation("AulasLista");
@@ -799,6 +1001,8 @@ namespace PortalEDU.AccesoDatos.Migrations
 
             modelBuilder.Entity("PortalEDU.Models.Curso", b =>
                 {
+                    b.Navigation("AlumnoCursos");
+
                     b.Navigation("DocenteCursos");
 
                     b.Navigation("TareaDocente");
@@ -807,11 +1011,25 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("PortalEDU.Models.Responsable", b =>
                 {
                     b.Navigation("AlumnoLista");
+
+                    b.Navigation("Salas");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.Sala", b =>
+                {
+                    b.Navigation("SalaComentarios");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.TareaDocente", b =>
                 {
                     b.Navigation("TareaAlumnos");
+                });
+
+            modelBuilder.Entity("PortalEDU.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("AlumnosIU");
+
+                    b.Navigation("ResponsableIU");
                 });
 #pragma warning restore 612, 618
         }

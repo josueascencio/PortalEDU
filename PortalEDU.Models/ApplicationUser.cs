@@ -18,7 +18,7 @@ namespace PortalEDU.Models
 
         //public ICollection<Docente> DocenteIU { get; set; } 
 
-        //public ICollection<Responsable> ResponsableIU { get; set; } 
+        public ICollection<Responsable> ResponsableIU { get; set; }
 
     }
 }

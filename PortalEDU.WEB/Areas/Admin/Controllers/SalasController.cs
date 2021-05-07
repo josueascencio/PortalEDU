@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortalEDU.AccesoDatos.Data;
@@ -13,45 +14,49 @@ using System.Threading.Tasks;
 
 namespace PortalEDU.WEB.Areas.Admin.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Area("Admin")]
     public class SalasController : Controller
     {
-        private readonly ApplicationDbContext _context;
+
         private readonly IContenedorTrabajo _contenedorTrabajo;
         private readonly IWebHostEnvironment _hostinEnvironment;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public SalasController(ApplicationDbContext context, IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment)
+        public SalasController(ApplicationDbContext context, IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _context = context;
             _contenedorTrabajo = contenedorTrabajo;
             _hostinEnvironment = hostinEnvironment;
+            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            SalaVM salaVM = new SalaVM()
-            {
+           
+                SalaVM salaVM = new SalaVM()
+                {
+
+                    SalaEnVM = new Models.Sala(),
+                    SalaComentarioEnVM = new Models.SalaComentario(),
+                    ListSala = _context.Sala.ToList(),
+                    ListSalaComentario = _context.SalaComentario.ToList(),
+                    ListaResponsable = _context.Responsable.ToList(),
+                    ListaResponsableItems = _contenedorTrabajo.Responsable.GetListaResponsable(),
+                    IESala = _context.Sala.ToList(),
+                    IESalaComentario = _context.SalaComentario.ToList(),
 
 
 
-                SalaEnVM = new Models.Sala(),
-                SalaComentarioEnVM = new Models.SalaComentario(),
-                ListSala = _context.Sala.ToList(),
-                ListSalaComentario = _context.SalaComentario.ToList(),
-                ListaResponsable = _context.Responsable.ToList(),
-                ListaResponsableItems = _contenedorTrabajo.Responsable.GetListaResponsable(),
-                IESala = _context.Sala.ToList(),
-                IESalaComentario = _context.SalaComentario.ToList(),
-                
 
+                    //ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo()
+                };
+                return View(salaVM);
+         
 
-
-                //ListaCentroEducativo = _contenedorTrabajo.CentroEducativo.GetListaCentroEducativo()
-            };
-
-
-            return View(salaVM);
         }
 
 
@@ -160,7 +165,8 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
                 return View("Details",salaVM);
             }
             //centroEducativoVM.ListaCiclo = _contenedorTrabajo.Ciclo.GetListaCiclo();
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return View();
         }
 
 
@@ -187,7 +193,7 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
                 };
 
-                return Json(new { success = true, message = "Centro Educativo borrado con exito" });
+                return Json(new { success = true, message = "Foro borrado con exito" });
 
 
             }
@@ -210,12 +216,12 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
             var objFromDb = _context.SalaComentario.Find(id);
             if (objFromDb == null)
             {
-                return Json(new { success = false, message = "Error borrando Centro Educativo" });
+                return Json(new { success = false, message = "Error borrando Foro" });
             }
 
             _context.SalaComentario.Remove(objFromDb);
             _context.SaveChanges();
-            return Json(new { success = true, message = "Centro Educativo borrado con exito" });
+            return Json(new { success = true, message = "Foro borrado con exito" });
         }
 
 

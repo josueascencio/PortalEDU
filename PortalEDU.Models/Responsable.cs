@@ -11,15 +11,15 @@ namespace PortalEDU.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio")]
+        //[Required(ErrorMessage = "Campo obligatorio")]
         public string Nombre { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio")]
+        //[Required(ErrorMessage = "Campo obligatorio")]
         public string Apellido { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio")]
+        //[Required(ErrorMessage = "Campo obligatorio")]
         public string Telefono { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio")]
+        //[Required(ErrorMessage = "Campo obligatorio")]
         public string Profesion { get; set; }
-        [Required(ErrorMessage = "Campo obligatorio")]
+        //[Required(ErrorMessage = "Campo obligatorio")]
         public string Direccion { get; set; }
         
         public string Foto { get; set; }
@@ -28,12 +28,17 @@ namespace PortalEDU.Models
         [Required]
         public DateTime update { get; set; }
 
+        public string? IdUsuario { get; set; }
+
+        [ForeignKey("IdUsuario")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         [NotMapped]
         public string NombreCompleto => $"{Nombre} {Apellido}";
 
         [Display(Name = "Alumnos a Cargo")]
-     
         public virtual ICollection<Alumno> AlumnoLista { get; set; }
+        public virtual ICollection<Sala> Salas { get; set; }
 
         //public virtual Alumno IdAlumnoNavigation { get; set; }
     }

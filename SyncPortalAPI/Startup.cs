@@ -88,10 +88,10 @@ namespace SyncPortalAPI
             //var connectionStringMy = Configuration.GetSection("ConnectionStringsAPI")["MySqlConnection"];
 
             // [Required]: Tables list involved in the sync process
-            var tables = new string[] { "CentroEducativo" };
+            var tables = new string[] { "Calificaciones" };
 
             var syncSetup = new SyncSetup(tables);
-            syncSetup.Tables["CentroEducativo"].SyncDirection = SyncDirection.UploadOnly;
+            syncSetup.Tables["Calificaciones"].SyncDirection = SyncDirection.UploadOnly;
             //syncSetup.Tables["Customer"].SyncDirection = SyncDirection.UploadOnly;
 
             // [Required]: Add a SqlSyncProvider acting as the server hub.

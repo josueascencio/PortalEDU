@@ -10,6 +10,7 @@ namespace PortalEDU.Models.ViewModels
         public IEnumerable<Sala> IESala { get; set; }
         public List<Sala> ListSala { get; set; }
         public Sala SalaEnVM { get; set; }
+        public Responsable ResponsableEnVM { get; set; }
 
         public IEnumerable<SalaComentario> IESalaComentario { get; set; }
         public List<SalaComentario> ListSalaComentario { get; set; }

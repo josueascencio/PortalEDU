@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +24,17 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
         private readonly IContenedorTrabajo _contenedorTrabajo;
         private readonly IWebHostEnvironment _hostinEnvironment;
-        private readonly IFlashMessage _flashMessage;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public ResponsablesController(IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment, IFlashMessage flashMessage)
+        public ResponsablesController(ApplicationDbContext context, IContenedorTrabajo contenedorTrabajo, IWebHostEnvironment hostinEnvironment, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _contenedorTrabajo = contenedorTrabajo;
             _hostinEnvironment = hostinEnvironment;
-            _flashMessage = flashMessage;
+            _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
 
@@ -37,35 +42,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
         public IActionResult Index()
         {
 
-            //    //ResponsableVM artivm = new ResponsableVM()
-            //    //{
-            //    //    responsable = new PortalEDU.Models.Responsable(),
-            //    //    ListaAlumnos = _contenedorTrabajo.Alumno.GetListaAlumno()
-            //    //    // Articulo = new Models.
-
-            //    //};
-
-
-            //    //////Funciona
-
-            //    // var responsables = _context.Responsable.Include( c => c.AlumnoListaProp).AsNoTracking();
-
-
-
-            //    //////Funciona
-
-            //    //List<Responsable> objlist = _context.Responsable.ToList();
-
-            //    //foreach (var obj in objlist)
-            //    //{
-            //    //    _context.Entry(obj).Collection(u => u.AlumnoListaProp).Load();
-
-            //    //    foreach (var ResponAlumno in obj.AlumnoListaProp)
-            //    //    {
-            //    //        _context.Entry(ResponAlumno).Reference(a => a.Responsable).Load();
-            //    //    }
-
-            //    //   }
 
 
             return View();
@@ -138,86 +114,6 @@ namespace PortalEDU.WEB.Areas.Admin.Controllers
 
 
         }
-
-
-
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(ResponsableVM responsableVM)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        string webRootPath = _hostinEnvironment.WebRootPath;
-        //        var archivos = HttpContext.Request.Form.Files;
-        //        if (archivos.Count > 0)
-        //        {
-        //            string fileName = Guid.NewGuid().ToString();
-        //            var uploads = Path.Combine(webRootPath, @"imagenes\responsables");
-        //            var extenstion = Path.GetExtension(archivos[0].FileName);
-
-        //            if (responsableVM.responsable.Foto != null)
-        //            {
-        //                //this is an edit and we need to remove old image
-        //                var imagePath = Path.Combine(webRootPath, responsableVM.responsable.Foto.TrimStart('\\'));
-        //                if (System.IO.File.Exists(imagePath))
-        //                {
-        //                    System.IO.File.Delete(imagePath);
-        //                }
-        //            }
-        //            using (var filesStreams = new FileStream(Path.Combine(uploads, fileName + extenstion), FileMode.Create))
-        //            {
-        //                archivos[0].CopyTo(filesStreams);
-        //            }
-        //            responsableVM.responsable.Foto = @"\imagenes\responsables\" + fileName + extenstion;
-        //        }
-        //        else
-        //        {
-        //            //update when they do not change the image
-        //            if (responsableVM.responsable.Id != 0)
-        //            {
-        //                Responsable objFromDb = _contenedorTrabajo.Responsable.Get(responsableVM.responsable.Id);
-        //                responsableVM.responsable.Foto = objFromDb.Foto;
-        //            }
-        //        }
-
-
-        //        if (responsableVM.responsable.Id == 0)
-        //        {
-        //            _contenedorTrabajo.Responsable.Add(responsableVM.responsable);
-
-        //        }
-        //        else
-        //        {
-        //            _contenedorTrabajo.Responsable.Update(responsableVM.responsable);
-        //        }
-        //        _contenedorTrabajo.Save();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    else
-        //    {
-        //        //    IEnumerable<Category> CatList = await _unitOfWork.Category.GetAllAsync();
-        //        //    productVM.CategoryList = CatList.Select(i => new SelectListItem
-        //        //    {
-        //        //        Text = i.Name,
-        //        //        Value = i.Id.ToString()
-        //        //    });
-        //        //    productVM.CoverTypeList = _unitOfWork.CoverType.GetAll().Select(i => new SelectListItem
-        //        //    {
-        //        //        Text = i.Name,
-        //        //        Value = i.Id.ToString()
-        //        //    });
-        //        if (responsableVM.responsable.Id != 0)
-        //    {
-        //        responsableVM.responsable = _contenedorTrabajo.Responsable.Get(responsableVM.responsable.Id);
-        //    }
-        //}
-        //    return View(responsableVM);
-        //}
-
-
-
 
 
 

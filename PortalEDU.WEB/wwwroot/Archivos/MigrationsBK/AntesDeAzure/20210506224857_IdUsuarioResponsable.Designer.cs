@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalEDU.AccesoDatos.Data;
 
 namespace PortalEDU.AccesoDatos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210506224857_IdUsuarioResponsable")]
+    partial class IdUsuarioResponsable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -555,9 +557,11 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Foto")
@@ -567,12 +571,15 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Profesion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelefonoTrabajo")
@@ -932,7 +939,7 @@ namespace PortalEDU.AccesoDatos.Migrations
                         .HasForeignKey("IdDocente");
 
                     b.HasOne("PortalEDU.Models.Responsable", "Responsable")
-                        .WithMany("Salas")
+                        .WithMany()
                         .HasForeignKey("IdResponsable");
 
                     b.Navigation("Docente");
@@ -1009,8 +1016,6 @@ namespace PortalEDU.AccesoDatos.Migrations
             modelBuilder.Entity("PortalEDU.Models.Responsable", b =>
                 {
                     b.Navigation("AlumnoLista");
-
-                    b.Navigation("Salas");
                 });
 
             modelBuilder.Entity("PortalEDU.Models.Sala", b =>

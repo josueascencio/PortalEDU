@@ -2,7 +2,7 @@
 
 namespace PortalEDU.AccesoDatos.Migrations
 {
-    public partial class deletealumnocurso : Migration
+    public partial class ResponsableSalaNavegacion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
